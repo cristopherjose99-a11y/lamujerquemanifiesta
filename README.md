@@ -8,20 +8,28 @@ Sitio de venta de los kits digitales. HTML estático, sin build de dependencias,
 
 ## ➕ Cómo añadir un producto
 
-Abre **[`MIS-PRODUCTOS.js`](MIS-PRODUCTOS.js)**, baja hasta donde pone `PRODUCTO 2`, quita las
-marcas de comentario (`/*` y `*/`) y cambia los textos. Son siete líneas:
+Abre **[`MIS-PRODUCTOS.js`](MIS-PRODUCTOS.js)**. Arriba del todo, entre *COPIA DESDE AQUÍ* y
+*HASTA AQUÍ*, está la plantilla. Son tres pasos:
+
+1. **Copia** ese bloque, desde la `{` hasta la `},`
+2. **Baja al final** del archivo, donde pone `↓ PEGA AQUÍ ↓`
+3. **Pega y cambia los textos**
 
 ```js
 {
-  slug:        "mi-producto-nuevo",    // la carpeta: .../mi-producto-nuevo/
-  nombre:      "Mi Producto Nuevo",
+  slug:        "nombre-corto-sin-tildes",   // .../nombre-corto-sin-tildes/
+  nombre:      "Nombre del producto",
   categoria:   "Kit digital",
   subtitulo:   "Lo que sea",
-  checkout:    "https://go.hotmart.com/XXXXX?ap=XXXX",
+  checkout:    "https://go.hotmart.com/XXXXXX?ap=XXXX",
   precio:      "$27",
+  precioAntes: "$89",
   descripcion: "Una línea contando de qué va."
-}
+},
 ```
+
+La plantilla se queda arriba siempre, así que sirve para el segundo producto, el tercero
+y los que vengan. Ponle encima un comentario con su número (`// PRODUCTO 3`) para no perderte.
 
 Con eso se genera sola una landing completa, con el estilo del sitio: portada, oferta con
 cuenta atrás, garantía, preguntas frecuentes y cierre. Y aparece en el catálogo.

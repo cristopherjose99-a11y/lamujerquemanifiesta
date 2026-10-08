@@ -4,9 +4,45 @@
 
    Este es el ÚNICO archivo que tocas. Todo lo demás se genera solo.
 
-   ── PARA AÑADIR UN PRODUCTO ──────────────────────────────────────────────
-   Baja hasta PRODUCTO 2, quita las marcas de comentario y cambia los textos.
-   Son siete líneas. Luego guarda y ya está.
+
+   ╔═══════════════════════════════════════════════════════════════════════╗
+   ║                                                                       ║
+   ║   PARA AÑADIR UN PRODUCTO                                             ║
+   ║                                                                       ║
+   ║   1. Copia el bloque de aquí abajo, desde la llave { hasta la },      ║
+   ║   2. Baja al final del archivo, donde pone PEGA AQUÍ,                 ║
+   ║   3. Pégalo y cambia los textos.                                      ║
+   ║                                                                       ║
+   ╚═══════════════════════════════════════════════════════════════════════╝
+
+
+   ─────────────────  COPIA DESDE AQUÍ  ─────────────────
+
+  {
+    slug:        "nombre-corto-sin-tildes",
+    nombre:      "Nombre del producto",
+    categoria:   "Kit digital",
+    subtitulo:   "Lo que sea",
+    checkout:    "https://go.hotmart.com/XXXXXX?ap=XXXX",
+    precio:      "$27",
+    precioAntes: "$89",
+    descripcion: "Una línea contando de qué va."
+  },
+
+   ─────────────────  HASTA AQUÍ  ─────────────────
+
+
+   Con eso basta. Se genera sola su landing completa, con el estilo del sitio,
+   y aparece en el catálogo.
+
+   · slug  es la dirección web:  lamujerquemanifiesta.com/nombre-corto-sin-tildes/
+     Solo minúsculas, números y guiones. Sin tildes, sin eñes, sin espacios.
+
+   · Si todavía no se puede comprar, déjale el checkout vacío y añádele
+     una línea más:        proximamente: true
+
+   · Si te equivocas en algo, al generar te lo dice en español y no toca nada.
+
 
    ── PARA CAMBIAR ALGO RÁPIDO ─────────────────────────────────────────────
    El precio . . . . . . . . . .  precio:  "$17"   (y precioAntes)
@@ -200,23 +236,17 @@ const PRODUCTOS = [
 
 
 /* ═══════════════════════════════════════════════════════════════════════
-   PRODUCTO 2
 
-   Quita las dos líneas de abajo (la de /* y la de *​/) y cambia los textos.
-   Con esto basta: la landing se genera sola con el estilo del sitio.
+                         ↓ ↓ ↓   P E G A   A Q U Í   ↓ ↓ ↓
+
+   El bloque que copiaste de arriba va justo debajo de esta línea.
+   Ponle encima un comentario con su número para no perderte:
+
+       // PRODUCTO 2
+       // PRODUCTO 3   ... y así
+
    ═══════════════════════════════════════════════════════════════════════ */
-/*
-{
-  slug:        "tu-segundo-producto",
-  nombre:      "Tu segundo producto",
-  categoria:   "Kit digital",
-  subtitulo:   "Lo que sea",
-  checkout:    "",
-  precio:      "",
-  descripcion: "Una línea contando de qué va.",
-  proximamente: true          // quítalo cuando ya se pueda comprar
-},
-*/
+
 
 
 ];
