@@ -36,7 +36,17 @@ Ambos comparten el mismo marcado y los mismos estilos. Si cambias uno, replica e
 
 ## Pendientes antes de lanzar
 
-- [ ] **Enlazar los botones a la pasarela de pago.** Los CTAs apuntan a `#oferta` o a `#`. Busca `href="#"` en la sección `id="oferta"` y pon la URL de Hotmart / Stripe / Gumroad.
+### Enlace de pago
+
+Checkout de Hotmart: `https://go.hotmart.com/P107334202L?ap=c4cb`
+
+Está en **cuatro** sitios de `index.html` y `artifact.html` (hero, sección de oferta, CTA final
+y barra fija de móvil) y en la lista `PRODUCTOS` de `productos.html`. Si cambia, buáscalo con
+`grep -rn 'go.hotmart.com' .` y reemplázalo en todos.
+
+Ojo: `https://go.hotmart.com/P107334202L` **sin** el `?ap=c4cb` no lleva al pago, lleva a la
+página de ventas configurada en el producto.
+
 - [ ] **Sustituir los testimonios.** Los tres bloques de la sección «Lo que dicen» están marcados como `Ejemplo`. Cámbialos por testimonios reales con nombre y foto.
 - [ ] **Confirmar precios.** La página usa $17 USD sobre un valor de $55 (69% de descuento) y el desglose suma $100. Ajusta las cifras si el precio real es otro.
 - [ ] **Imagen Open Graph.** Añade `og-image.jpg` (1200×630 px) en la raíz y descomenta las dos metas en el `<head>`.
