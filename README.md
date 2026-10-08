@@ -48,8 +48,6 @@ Ojo: `https://go.hotmart.com/P107334202L` **sin** el `?ap=c4cb` no lleva al pago
 página de ventas configurada en el producto.
 
 - [ ] **Sustituir los testimonios.** Los tres bloques de la sección «Lo que dicen» están marcados como `Ejemplo`. Cámbialos por testimonios reales con nombre y foto.
-- [ ] **Confirmar precios.** La página usa $17 USD sobre un valor de $55 (69% de descuento) y el desglose suma $100. Ajusta las cifras si el precio real es otro.
-- [ ] **Imagen Open Graph.** Añade `og-image.jpg` (1200×630 px) en la raíz y descomenta las dos metas en el `<head>`.
 - [ ] **Analítica.** No hay ningún píxel instalado (Meta, GA4, TikTok).
 
 ## Desarrollo local
