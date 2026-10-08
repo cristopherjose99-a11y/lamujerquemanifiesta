@@ -226,8 +226,8 @@ var PRODUCTOS = [
     titulo:      "La Mujer que Manifiesta",
     portada:     "Método de 21 días",
     descripcion: "Libro digital, trackers imprimibles y audios de reprogramación para romper el ciclo de escasez en tres semanas.",
-    precio:      "17 €",
-    precioAntes: "55 €",
+    precio:      "$17",
+    precioAntes: "$55",
     enlace:      "https://go.hotmart.com/P107334202L?ap=c4cb",
     boton:       "Comprar el kit"
   },
@@ -281,6 +281,8 @@ var PRODUCTOS = [
     if (vivo && p.enlace) {
       boton =
         '<a href="' + esc(p.enlace) + '" ' +
+        // Los enlaces de pago abren en pestaña nueva: el catálogo queda abierto detrás
+        (/^https?:/.test(p.enlace) ? 'target="_blank" rel="noopener" ' : '') +
         'class="btn-gold mt-5 flex items-center justify-center rounded-full font-bold uppercase tracking-[.1em] text-[.74rem]" ' +
         'style="padding:.95rem 1rem; text-decoration:none;">' + esc(p.boton || 'Ver más') + '</a>';
     }
