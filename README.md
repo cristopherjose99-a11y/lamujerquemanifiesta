@@ -1,87 +1,137 @@
 # La Mujer que Manifiesta
 
-Landing page de ventas del kit digital **La Mujer que Manifiesta** — método de 21 días para
-reprogramar creencias de escasez. Libro digital, trackers imprimibles y audios guiados.
+Sitio de venta de los kits digitales. HTML estático, sin build de dependencias, servido por GitHub Pages.
 
 🔗 **Web:** https://lamujerquemanifiesta.com
 
+---
 
+## ➕ Cómo añadir un producto
+
+Todo se controla desde **un solo archivo**: [`productos.config.js`](productos.config.js).
+
+Abre ese archivo, copia un bloque `{ ... }` entero, pégalo debajo y cambia los textos.
+Lo mínimo que necesita un producto son cuatro datos:
+
+```js
+{
+  slug:     "mi-producto-nuevo",     // la carpeta: lamujerquemanifiesta.com/mi-producto-nuevo/
+  nombre:   "Mi Producto Nuevo",
+  checkout: "https://go.hotmart.com/XXXXX?ap=XXXX",   // el enlace de pago
+  precio:   "$27"
+}
+```
+
+Luego, **una de estas dos cosas**:
+
+**Desde el navegador (lo más fácil).** Edita `productos.config.js` en GitHub, dale a *Commit*,
+y una acción automática genera las páginas y las publica. No hay que hacer nada más.
+
+**Desde tu ordenador.** En la carpeta del proyecto:
+
+```bash
+node build.js
+```
+
+Y luego `git add -A && git commit -m "nuevo producto" && git push`.
+
+En ambos casos se crea sola la landing completa del producto nuevo, idéntica en diseño a la
+actual pero con sus textos, y aparece en el catálogo.
+
+> Todas las secciones son opcionales. Si omites `dolor`, `bonos`, `faq`… esa sección
+> simplemente no sale. Puedes publicar con lo mínimo y rellenar después.
+>
+> Si todavía no tienes el enlace de pago, pon `estado: "proximamente"`: sale en el catálogo
+> marcado como «Pronto», sin botón de compra.
+
+---
 
 ## Archivos
 
 | Archivo | Para qué sirve |
 |---|---|
-| `index.html` | La página completa. Documento HTML autónomo, sin build. Es lo que sirve GitHub Pages. |
-| `artifact.html` | La misma página sin `<!doctype>` ni `<head>`, para publicarla como Artifact de Claude. |
-| `productos.html` | Catálogo de productos. Para añadir uno, edita la lista `PRODUCTOS` del `<script>` al final del archivo. |
+| **`productos.config.js`** | **El único que editas.** Todos los productos y sus textos. |
+| `build.js` | Genera las páginas a partir del anterior. `node build.js`. |
+| `plantillas/` | Estilos compartidos: paleta, tipografías, componentes. |
+| `.github/workflows/construir.yml` | Regenera y publica solo al editar el config en GitHub. |
+| `og-image.jpg` | Imagen que se ve al compartir el enlace. 1200×630. |
 
-Ambos comparten el mismo marcado y los mismos estilos. Si cambias uno, replica el cambio en el otro.
+### Generados automáticamente — no los edites a mano
+
+Lo que escribas aquí se pierde en la siguiente generación.
+
+| Archivo | Qué es |
+|---|---|
+| `index.html` | La portada: la landing del producto con `principal: true`. |
+| `<slug>/index.html` | Una landing completa por producto. |
+| `productos.html` | El catálogo. |
+| `artifact.html` | Copia sin `<head>` para previsualizar en Claude. |
+
+---
 
 ## Stack
 
-- HTML estático, sin dependencias de build
-- [Tailwind CSS 3.4.17](https://tailwindcss.com) por CDN (play CDN, configurado inline)
-- Google Fonts: Playfair Display (titulares) y Plus Jakarta Sans (texto)
+HTML estático · [Tailwind CSS 3.4.17](https://tailwindcss.com) por CDN · Playfair Display y Plus Jakarta Sans
 
-## Paleta
+### Paleta
 
 | Token | Hex | Uso |
 |---|---|---|
 | Crema | `#FDFBF7` | Fondo principal |
 | Lino | `#FAF6EE` | Secciones alternadas |
-| Arena | `#E8DED1` | Tarjetas y contenedores |
+| Arena | `#E8DED1` | Tarjetas |
 | Grafito | `#2A2421` | Texto |
-| Oro | `#D4AF37` | CTAs, acentos, filetes |
-| Oro viejo | `#C5A059` | Hover de CTAs |
+| Oro | `#D4AF37` | CTAs y acentos |
+| Oro viejo | `#C5A059` | Hover |
 
-## Pendientes antes de lanzar
-
-### Enlace de pago
-
-Checkout de Hotmart: `https://go.hotmart.com/P107334202L?ap=c4cb`
-
-Está en **cuatro** sitios de `index.html` y `artifact.html` (hero, sección de oferta, CTA final
-y barra fija de móvil) y en la lista `PRODUCTOS` de `productos.html`. Si cambia, buáscalo con
-`grep -rn 'go.hotmart.com' .` y reemplázalo en todos.
-
-Ojo: `https://go.hotmart.com/P107334202L` **sin** el `?ap=c4cb` no lleva al pago, lleva a la
-página de ventas configurada en el producto.
-
-- [ ] **Sustituir los testimonios.** Los tres bloques de la sección «Lo que dicen» están marcados como `Ejemplo`. Cámbialos por testimonios reales con nombre y foto.
-- [ ] **Píxeles de anuncios — PENDIENTE, el usuario pasará los IDs.**
-  - **Meta Pixel** (Facebook + Instagram). ID numérico, se saca de Meta Business Suite → Administrador de eventos.
-  - **Google Analytics 4**. ID de medición, empieza por `G-`, en Analytics → Administrar → Flujos de datos.
-  - Instalar en `index.html`, `artifact.html` y `productos.html`.
-  - **Importante:** el pago ocurre en Hotmart, así que el píxel de la web solo ve visitas y clics. Hay que
-    conectar el mismo píxel dentro de Hotmart (Herramientas → Píxeles) para que las compras se atribuyan.
-
-## Navegación
-
-La landing lleva una cabecera fija (`<nav class="sticky">`, justo antes del hero) con la marca,
-**Qué incluye**, **Productos** y un botón de compra. En móvil se ocultan «Qué incluye» y el botón
-para no apretar la barra; abajo ya hay un CTA fijo.
-
-El enlace a `productos.html` está en la cabecera y también en el pie.
+---
 
 ## La cuenta atrás
 
-El contador de la sección de oferta es **por visitante**, no global. El plazo se guarda en
-`localStorage` del navegador de cada persona:
+Es **por visitante**, no global. El plazo se guarda en el navegador de cada persona:
 
-- Quien vuelve, retoma el tiempo donde lo dejó. No se reinicia.
+- Quien vuelve, retoma donde lo dejó. No se reinicia.
 - Quien llega por primera vez, empieza con el plazo completo.
-- Al llegar a cero arranca otro plazo, nunca se queda en `00 h 00 m 00 s`.
+- Al llegar a cero arranca otro, nunca se queda en `00 h 00 m 00 s`.
 
-Para cambiar la duración, edita `HORAS_DE_OFERTA` en el `<script>` del final de `index.html`
-(y replica el cambio en `artifact.html`). Está en 24 horas.
+Se cambia con `horasOferta` en `productos.config.js`. Está en 8 horas.
 
-Funciona también en incógnito: si el navegador bloquea el almacenamiento, el plazo se mantiene
-en memoria durante la visita.
+Funciona también en incógnito: si el navegador bloquea el almacenamiento, el plazo se
+mantiene en memoria durante la visita.
+
+---
+
+## Dominio
+
+`lamujerquemanifiesta.com`, comprado en Porkbun, apuntando a GitHub Pages con HTTPS.
+Los detalles y el diagnóstico de problemas están en [DOMINIO.md](DOMINIO.md).
+
+**El archivo [`CNAME`](CNAME) no se borra.** Si desaparece, la web deja de responder en el dominio.
+
+---
+
+## Pendiente
+
+- [ ] **Píxeles de anuncios — el usuario pasará los IDs.**
+  - **Meta Pixel** (Facebook + Instagram). ID numérico, de Meta Business Suite → Administrador de eventos.
+  - **Google Analytics 4**. ID que empieza por `G-`, en Analytics → Administrar → Flujos de datos.
+  - Se instalan en `build.js` para que entren en todas las páginas de golpe.
+  - **Importante:** el pago ocurre en Hotmart, así que el píxel de la web solo ve visitas y clics.
+    Hay que conectar el mismo píxel dentro de Hotmart (Herramientas → Píxeles) o las compras
+    no se atribuyen y los anuncios optimizan a ciegas.
+
+- [ ] **Testimonios reales.** Mientras el array `testimonios` esté vacío se muestra la sección
+  de «primera edición», que dice la verdad. En cuanto metas testimonios reales, esa sección
+  se sustituye sola por ellos.
+
+- [ ] **Renovación automática del dominio** en Porkbun.
+
+---
 
 ## Desarrollo local
 
 ```bash
-python3 -m http.server 8000
+node build.js && python3 -m http.server 8000
 ```
 
 Luego abre http://localhost:8000

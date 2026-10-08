@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="light">
 
 <title>Productos — La Mujer que Manifiesta</title>
-<meta name="description" content="Todos los kits y recursos digitales para reprogramar tu relación con el dinero, tus proyectos y tu poder interior.">
+<meta name="description" content="Todos los kits y recursos digitales de La Mujer que Manifiesta.">
 <link rel="canonical" href="https://lamujerquemanifiesta.com/productos.html">
 
 <meta property="og:type" content="website">
@@ -14,14 +14,22 @@
 <meta property="og:site_name" content="La Mujer que Manifiesta">
 <meta property="og:url" content="https://lamujerquemanifiesta.com/productos.html">
 <meta property="og:title" content="Productos — La Mujer que Manifiesta">
-<meta property="og:description" content="Todos los kits y recursos digitales para reprogramar tu relación con el dinero, tus proyectos y tu poder interior.">
+<meta property="og:description" content="Todos los kits y recursos digitales de La Mujer que Manifiesta.">
 <meta property="og:image" content="https://lamujerquemanifiesta.com/og-image.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://lamujerquemanifiesta.com/og-image.jpg">
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23FDFBF7'/%3E%3Cpath d='M16 6l7 10-7 10-7-10z' fill='%23D4AF37'/%3E%3C/svg%3E">
+
+<style>
+  /* Reset minimo equivalente al que inyecta el visor de Artifacts */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  :root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+  body { margin: 0; }
+  img, svg { max-width: 100%; }
+  [hidden] { display: none !important; }
+</style>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,81 +38,168 @@
 <script src="https://cdn.tailwindcss.com/3.4.17"></script>
 <script>
   tailwind.config = {
-    theme: { extend: {
-      colors: { crema:'#FDFBF7', lino:'#FAF6EE', arena:'#E8DED1', grafito:'#2A2421', oro:'#D4AF37', oroviejo:'#C5A059' },
-      fontFamily: {
-        display: ['"Playfair Display"','Georgia','serif'],
-        sans:    ['"Plus Jakarta Sans"','system-ui','sans-serif']
+    theme: {
+      extend: {
+        colors: {
+          crema:   '#FDFBF7',
+          lino:    '#FAF6EE',
+          arena:   '#E8DED1',
+          grafito: '#2A2421',
+          oro:     '#D4AF37',
+          oroviejo:'#C5A059'
+        },
+        fontFamily: {
+          display: ['"Playfair Display"', 'Georgia', 'Times New Roman', 'serif'],
+          sans:    ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif']
+        }
       }
-    }}
+    }
   }
 </script>
 
 <style>
-  /* Mismos tokens que la landing: catalogo en rejilla, tarjetas de arena sobre crema. */
+  /* Minimal luxury: una columna editorial centrada, secciones alternadas crema/lino,
+     el oro reservado para CTAs y filetes finos. Un solo tema, por decision de marca. */
   :root {
-    --bg:#FDFBF7; --bg-alt:#FAF6EE; --surface:#E8DED1;
-    --fg:#2A2421; --fg-soft:#6B6058;
-    --gold:#D4AF37; --gold-deep:#C5A059;
-    --hairline:rgba(212,175,55,.32);
+    --bg:        #FDFBF7;
+    --bg-alt:    #FAF6EE;
+    --surface:   #E8DED1;
+    --fg:        #2A2421;
+    --fg-soft:   #6B6058;
+    --gold:      #D4AF37;
+    --gold-deep: #C5A059;
+    --hairline:  rgba(212,175,55,.32);
     color-scheme: light;
   }
 
-  *, *::before, *::after { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-  :root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
-  img, svg { max-width: 100%; }
-  [hidden] { display: none !important; }
-
   body {
-    margin: 0; background: var(--bg); color: var(--fg);
-    font-family: '"Plus Jakarta Sans"','Plus Jakarta Sans',system-ui,sans-serif;
-    -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: '"Plus Jakarta Sans"', 'Plus Jakarta Sans', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
 
-  h1, h2, h3 { text-wrap: balance; }
+  h1, h2, h3, .display { text-wrap: balance; }
   p { text-wrap: pretty; }
 
-  .wrap { width:100%; max-width:1120px; margin-inline:auto; padding-inline:20px; }
-  .measure { max-width:62ch; }
+  .wrap { width: 100%; max-width: 1120px; margin-inline: auto; padding-inline: 20px; }
+  .measure { max-width: 62ch; }
 
   .eyebrow {
-    font-size:.6875rem; letter-spacing:.22em; text-transform:uppercase;
-    font-weight:600; color:var(--gold-deep);
+    font-size: .6875rem; letter-spacing: .22em; text-transform: uppercase;
+    font-weight: 600; color: var(--gold-deep);
   }
+
+  .hairline { border-color: var(--hairline); }
 
   .rule {
-    height:1px; border:0;
-    background:linear-gradient(90deg, transparent, var(--hairline) 18%, var(--hairline) 82%, transparent);
+    height: 1px; border: 0;
+    background: linear-gradient(90deg, transparent, var(--hairline) 18%, var(--hairline) 82%, transparent);
   }
 
+  /* Boton dorado con brillo que cruza al pasar el cursor */
   .btn-gold {
-    position:relative; overflow:hidden; isolation:isolate;
-    background:linear-gradient(135deg,#E0C25B 0%,var(--gold) 46%,var(--gold-deep) 100%);
-    color:#231E1A;
-    box-shadow:0 1px 0 rgba(255,255,255,.5) inset, 0 12px 28px -12px rgba(170,133,30,.65);
-    transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+    position: relative; overflow: hidden; isolation: isolate;
+    background: linear-gradient(135deg, #E0C25B 0%, var(--gold) 46%, var(--gold-deep) 100%);
+    color: #231E1A;
+    box-shadow: 0 1px 0 rgba(255,255,255,.5) inset, 0 12px 28px -12px rgba(170,133,30,.65);
+    transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
   }
   .btn-gold:hover {
-    background:linear-gradient(135deg,var(--gold) 0%,var(--gold-deep) 55%,#B8954F 100%);
-    transform:translateY(-2px);
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-deep) 55%, #B8954F 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 1px 0 rgba(255,255,255,.4) inset, 0 18px 34px -14px rgba(170,133,30,.75);
   }
-  a:focus-visible, button:focus-visible {
-    outline:2px solid var(--gold-deep); outline-offset:3px; border-radius:2px;
+  .btn-gold:active { transform: translateY(0); }
+  .btn-gold::after {
+    content: ''; position: absolute; inset: 0 auto 0 -60%; width: 45%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,.55), transparent);
+    transform: skewX(-18deg); z-index: -1;
+  }
+  .btn-gold:hover::after { animation: sheen .9s ease forwards; }
+  @keyframes sheen { to { left: 115%; } }
+
+  .btn-gold:focus-visible,
+  a:focus-visible, summary:focus-visible, button:focus-visible {
+    outline: 2px solid var(--gold-deep); outline-offset: 3px; border-radius: 2px;
+  }
+
+  /* Mockup del kit: tres piezas apiladas en perspectiva */
+  .kit-stage { perspective: 1400px; }
+  .kit {
+    transform-style: preserve-3d;
+    transform: rotateY(-16deg) rotateX(6deg);
+    transition: transform .7s cubic-bezier(.2,.7,.3,1);
+  }
+  .kit-stage:hover .kit { transform: rotateY(-9deg) rotateX(3deg) translateY(-6px); }
+
+  .book {
+    background:
+      linear-gradient(118deg, rgba(255,255,255,.55) 0%, transparent 34%),
+      linear-gradient(160deg, #F3EADC 0%, #E8DED1 52%, #D8CBB8 100%);
+    box-shadow:
+      0 1px 0 rgba(255,255,255,.75) inset,
+      -1px 0 0 rgba(255,255,255,.6) inset,
+      38px 44px 70px -30px rgba(42,36,33,.42),
+      0 2px 8px rgba(42,36,33,.10);
+  }
+  .book::before { /* lomo */
+    content: ''; position: absolute; inset: 0 auto 0 0; width: 13px;
+    background: linear-gradient(90deg, #C9B99F, #E3D8C6 45%, rgba(227,216,198,0) 100%);
+    border-right: 1px solid rgba(255,255,255,.45);
+  }
+  .book::after { /* brillo dorado que se desplaza */
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(112deg, transparent 36%, rgba(212,175,55,.40) 50%, transparent 64%);
+    background-size: 280% 100%;
+    animation: glint 7s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes glint {
+    0%, 100% { background-position: 118% 0; }
+    50%      { background-position: -18% 0; }
+  }
+
+  .plate { /* trackers y audios detras del libro */
+    background: linear-gradient(155deg, #FFFDF9 0%, #F4ECDF 100%);
+    box-shadow: 18px 22px 40px -22px rgba(42,36,33,.34), 0 1px 0 rgba(255,255,255,.8) inset;
   }
 
   .card {
-    background:linear-gradient(165deg,#EFE7DA 0%,var(--surface) 100%);
-    border:1px solid var(--hairline);
-    box-shadow:0 1px 0 rgba(255,255,255,.65) inset, 0 16px 34px -26px rgba(42,36,33,.35);
-    transition:transform .3s cubic-bezier(.2,.7,.3,1), box-shadow .3s ease;
-  }
-  .card.is-live:hover {
-    transform:translateY(-4px);
-    box-shadow:0 1px 0 rgba(255,255,255,.65) inset, 0 24px 44px -26px rgba(42,36,33,.42);
+    background: linear-gradient(165deg, #EFE7DA 0%, var(--surface) 100%);
+    border: 1px solid var(--hairline);
+    box-shadow: 0 1px 0 rgba(255,255,255,.65) inset, 0 16px 34px -26px rgba(42,36,33,.35);
   }
 
-  /* Portada del producto: mismo lenguaje que el mockup de la landing */
+  .quiet-card {
+    background: #FFFDF9;
+    border: 1px solid rgba(42,36,33,.08);
+  }
+
+  .num {
+    font-family: '"Playfair Display"', 'Playfair Display', Georgia, serif;
+    font-size: 2.25rem; line-height: 1; color: var(--gold-deep);
+    font-variant-numeric: tabular-nums;
+  }
+
+  details > summary { cursor: pointer; list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] .chev { transform: rotate(45deg); }
+  .chev { transition: transform .25s ease; }
+
+  .count { font-variant-numeric: tabular-nums; }
+
+  /* Entrada suave desde un estado ya visible */
+  .rise { animation: rise .7s cubic-bezier(.2,.7,.3,1) both; }
+  @keyframes rise { from { opacity: .55; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .kit { transform: none; }
+  }
+</style>
+<style>
   .cover {
     position:relative; aspect-ratio:4/3; border-radius:10px; overflow:hidden;
     background:
@@ -116,72 +211,71 @@
   .cover::after {
     content:''; position:absolute; inset:0;
     background:linear-gradient(112deg, transparent 38%, rgba(212,175,55,.32) 50%, transparent 62%);
-    background-size:280% 100%;
-    animation:glint 7s ease-in-out infinite;
-    pointer-events:none;
+    background-size:280% 100%; animation:glint 7s ease-in-out infinite; pointer-events:none;
   }
-  @keyframes glint { 0%,100%{background-position:118% 0} 50%{background-position:-18% 0} }
-
+  .card.is-live { transition:transform .3s cubic-bezier(.2,.7,.3,1), box-shadow .3s ease; }
+  .card.is-live:hover { transform:translateY(-4px); }
+  .soon { opacity:.72; }
+  .soon .cover { filter:grayscale(.35); }
   .badge {
     display:inline-flex; align-items:center; gap:.4rem;
     font-size:.6rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
     border-radius:999px; padding:.3rem .7rem;
   }
-  .badge-live  { background:var(--gold); color:#231E1A; }
-  .badge-soon  { background:rgba(42,36,33,.07); color:var(--fg-soft); }
-
-  .soon { opacity:.72; }
-  .soon .cover { filter:grayscale(.35); }
-
-  .count { font-variant-numeric: tabular-nums; }
-
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation:none !important; transition:none !important; }
-  }
+  .badge-live { background:var(--gold); color:#231E1A; }
+  .badge-soon { background:rgba(42,36,33,.07); color:var(--fg-soft); }
 </style>
 </head>
 <body>
 
-<!-- ENCABEZADO -->
-<header style="border-bottom:1px solid var(--hairline);">
-  <div class="wrap flex items-center justify-between gap-4" style="padding-block:1.1rem;">
-    <a href="./" class="font-display leading-tight" style="font-size:1.05rem; text-decoration:none; color:var(--fg);">
-      La Mujer que Manifiesta
-    </a>
-    <a href="./" class="text-[.72rem] uppercase tracking-[.16em]" style="color:var(--gold-deep); text-decoration:none;">
-      ← Volver al kit
-    </a>
+<nav class="sticky z-40" aria-label="Principal"
+     style="top:env(safe-area-inset-top, 0px); background:rgba(253,251,247,.9); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid var(--hairline);">
+  <div class="wrap flex items-center justify-between gap-4" style="padding-block:.8rem;">
+    <a href="index.html" class="font-display leading-none shrink-0"
+       style="font-size:clamp(.92rem,3.4vw,1.08rem); text-decoration:none; color:var(--fg);">La Mujer que Manifiesta</a>
+    <a href="index.html" class="text-[.72rem] uppercase tracking-[.16em] whitespace-nowrap"
+       style="color:var(--gold-deep); text-decoration:none;">← Volver</a>
   </div>
-</header>
+</nav>
 
-<!-- INTRO -->
 <section>
   <div class="wrap" style="padding-block:clamp(2.75rem,7vw,4.5rem);">
     <p class="eyebrow">Catálogo</p>
     <h1 class="mt-4 font-display font-medium leading-[1.1] tracking-[-.015em]"
-        style="font-size:clamp(2rem,5vw,3.1rem);">
-      Todo lo que tenemos para ti
-    </h1>
+        style="font-size:clamp(2rem,5vw,3.1rem);">Todo lo que tenemos para ti</h1>
     <p class="mt-5 measure leading-relaxed" style="color:var(--fg-soft);">
       Recursos digitales para reprogramar tu relación con el dinero, sostener tus proyectos
-      y recuperar tu poder interior. Todos de acceso inmediato, pago único y con garantía
-      de siete días.
+      y recuperar tu poder interior. Todos de acceso inmediato y pago único.
     </p>
   </div>
 </section>
 
-<!-- REJILLA DE PRODUCTOS -->
 <section class="bg-lino">
   <div class="wrap" style="padding-block:clamp(3rem,7vw,4.5rem);">
-    <div id="rejilla" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
-
-    <p id="vacio" hidden class="text-center leading-relaxed" style="color:var(--fg-soft);">
-      Todavía no hay productos publicados.
-    </p>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <article class="card rounded-2xl flex flex-col is-live" style="padding:1.25rem; min-width:0;">
+        <div class="cover">
+          <div>
+            <p class="eyebrow" style="font-size:.5rem; letter-spacing:.24em;">Kit digital</p>
+            <p class="mt-3 font-display leading-tight" style="font-size:1.15rem;">Método de 21 días</p>
+          </div>
+        </div>
+        <div class="mt-5 flex items-start justify-between gap-3">
+          <h2 class="font-display leading-snug" style="font-size:1.3rem; min-width:0;">La Mujer que Manifiesta</h2>
+          <span class="badge badge-live shrink-0">Disponible</span>
+        </div>
+        <p class="mt-3 leading-relaxed grow" style="color:var(--fg-soft); font-size:.92rem;">Libro digital, trackers imprimibles y audios de reprogramación para romper el ciclo de escasez en tres semanas.</p>
+        <p class="mt-5 flex items-baseline gap-2">
+          <span class="font-display count" style="font-size:1.75rem;">$17</span>
+          <s class="count text-[.85rem]" style="color:var(--fg-soft); text-decoration-thickness:1px;">$55</s>
+        </p>
+        <a href="la-mujer-que-manifiesta/" class="btn-gold mt-5 flex items-center justify-center rounded-full font-bold uppercase tracking-[.1em] text-[.74rem]"
+           style="padding:.95rem 1rem; text-decoration:none;">Comprar el kit</a>
+      </article>
+    </div>
   </div>
 </section>
 
-<!-- PIE -->
 <footer style="border-top:1px solid var(--hairline);">
   <div class="wrap" style="padding-block:2.5rem;">
     <div class="flex flex-col sm:flex-row gap-6 sm:items-end sm:justify-between">
@@ -193,9 +287,7 @@
         Soporte: <span class="select-all font-medium" style="color:var(--fg);">Emprendersinlimitess@gmail.com</span>
       </p>
     </div>
-
     <hr class="rule my-6">
-
     <p class="text-[.72rem] leading-relaxed measure" style="color:var(--fg-soft);">
       Nuestros productos son material educativo y de desarrollo personal. No constituyen asesoría
       financiera, médica ni psicológica, y no sustituyen el acompañamiento de un profesional.
@@ -207,109 +299,7 @@
 </footer>
 
 <script>
-/* ──────────────────────────────────────────────────────────────────────
-   AQUÍ SE AÑADEN LOS PRODUCTOS
-
-   Copia un bloque { ... } entero, pégalo debajo y cambia los textos.
-   El orden de la lista es el orden en que aparecen en la página.
-
-   estado:  "disponible"  → tarjeta a color, con precio y botón
-            "proximamente" → tarjeta atenuada, sin botón
-   enlace:  a dónde lleva el botón ("/" es la landing del kit)
-   ────────────────────────────────────────────────────────────────────── */
-
-var PRODUCTOS = [
-
-  {
-    estado:      "disponible",
-    categoria:   "Kit digital",
-    titulo:      "La Mujer que Manifiesta",
-    portada:     "Método de 21 días",
-    descripcion: "Libro digital, trackers imprimibles y audios de reprogramación para romper el ciclo de escasez en tres semanas.",
-    precio:      "$17",
-    precioAntes: "$55",
-    enlace:      "https://go.hotmart.com/P107334202L?ap=c4cb",
-    boton:       "Comprar el kit"
-  },
-
-  {
-    estado:      "proximamente",
-    categoria:   "Próximo lanzamiento",
-    titulo:      "Tu segundo producto",
-    portada:     "Próximamente",
-    descripcion: "Sustituye este bloque por tu siguiente producto. Mientras el estado sea «proximamente», la tarjeta sale atenuada y sin botón de compra.",
-    precio:      "",
-    precioAntes: "",
-    enlace:      "",
-    boton:       ""
-  }
-
-];
-
-/* ────────────────────────────────────────────────────────────────────── */
-
-(function () {
-  var rejilla = document.getElementById('rejilla');
-  var vacio   = document.getElementById('vacio');
-
-  if (!PRODUCTOS.length) {
-    vacio.hidden = false;
-    return;
-  }
-
-  function esc(t) {
-    return String(t == null ? '' : t)
-      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
-  }
-
-  rejilla.innerHTML = PRODUCTOS.map(function (p) {
-    var vivo = p.estado === 'disponible';
-
-    var precio = '';
-    if (vivo && p.precio) {
-      precio =
-        '<p class="mt-5 flex items-baseline gap-2">' +
-          '<span class="font-display count" style="font-size:1.75rem; color:var(--fg);">' + esc(p.precio) + '</span>' +
-          (p.precioAntes
-            ? '<s class="count text-[.85rem]" style="color:var(--fg-soft); text-decoration-thickness:1px;">' + esc(p.precioAntes) + '</s>'
-            : '') +
-        '</p>';
-    }
-
-    var boton = '';
-    if (vivo && p.enlace) {
-      boton =
-        '<a href="' + esc(p.enlace) + '" ' +
-        // Los enlaces de pago abren en pestaña nueva: el catálogo queda abierto detrás
-        (/^https?:/.test(p.enlace) ? 'target="_blank" rel="noopener" ' : '') +
-        'class="btn-gold mt-5 flex items-center justify-center rounded-full font-bold uppercase tracking-[.1em] text-[.74rem]" ' +
-        'style="padding:.95rem 1rem; text-decoration:none;">' + esc(p.boton || 'Ver más') + '</a>';
-    }
-
-    return '' +
-      '<article class="card rounded-2xl flex flex-col ' + (vivo ? 'is-live' : 'soon') + '" style="padding:1.25rem; min-width:0;">' +
-        '<div class="cover">' +
-          '<div>' +
-            '<p class="eyebrow" style="font-size:.5rem; letter-spacing:.24em;">' + esc(p.categoria) + '</p>' +
-            '<p class="mt-3 font-display leading-tight" style="font-size:1.15rem;">' + esc(p.portada) + '</p>' +
-          '</div>' +
-        '</div>' +
-        '<div class="mt-5 flex items-start justify-between gap-3">' +
-          '<h2 class="font-display leading-snug" style="font-size:1.3rem; min-width:0;">' + esc(p.titulo) + '</h2>' +
-          '<span class="badge ' + (vivo ? 'badge-live' : 'badge-soon') + ' shrink-0">' +
-            (vivo ? 'Disponible' : 'Pronto') +
-          '</span>' +
-        '</div>' +
-        '<p class="mt-3 leading-relaxed grow" style="color:var(--fg-soft); font-size:.92rem;">' + esc(p.descripcion) + '</p>' +
-        precio +
-        boton +
-      '</article>';
-  }).join('');
-
-  var y = document.getElementById('year');
-  if (y) y.textContent = new Date().getFullYear();
-})();
+  (function () { var y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear(); })();
 </script>
 
 </body>
