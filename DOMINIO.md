@@ -1,66 +1,52 @@
-# Conectar lamujerquemanifiesta.com
+# Dominio: lamujerquemanifiesta.com ✅
 
-Estado: dominio **comprado en Porkbun** el 8 de octubre de 2026. Falta configurar el DNS.
+Conectado el 8 de octubre de 2026. La web vive en **https://lamujerquemanifiesta.com**
 
-La web funciona mientras tanto en
-https://cristopherjose99-a11y.github.io/lamujerquemanifiesta/
+## Cómo está montado
 
----
+- **Registrador:** Porkbun. Caduca el 8 de octubre de 2027.
+- **Hosting:** GitHub Pages, desde la rama `main` de este repositorio.
+- **Certificado HTTPS:** lo emite y renueva GitHub, gratis.
+- El archivo [`CNAME`](CNAME) de la raíz es lo que ata el dominio al repositorio. **No lo borres**: si desaparece, la web deja de responder en el dominio.
 
-## Paso 1 — Comprar el dominio ✅ HECHO
-
-`lamujerquemanifiesta.com` comprado en **Porkbun** el 8 de octubre de 2026.
-Caduca el 8 de octubre de 2027 — activa la renovación automática para no perderlo.
-
-Nameservers asignados: `curitiba` / `fortaleza` / `maceio` / `salvador` `.ns.porkbun.com`.
-
-## Paso 2 — Crear los registros DNS en Porkbun
-
-Porkbun → **Domain Management** → fila de `lamujerquemanifiesta.com` → botón **DNS**.
-
-El formulario tiene cuatro campos: **Type**, **Host**, **Answer**, **TTL**.
-Para el dominio raíz, **Host se deja vacío** (no escribas `@` ni el dominio).
-TTL: `600`.
+## Registros DNS en Porkbun
 
 | Type | Host | Answer |
 |---|---|---|
-| A | *(vacío)* | `185.199.108.153` |
-| A | *(vacío)* | `185.199.109.153` |
-| A | *(vacío)* | `185.199.110.153` |
-| A | *(vacío)* | `185.199.111.153` |
-| AAAA | *(vacío)* | `2606:50c0:8000::153` |
-| AAAA | *(vacío)* | `2606:50c0:8001::153` |
-| AAAA | *(vacío)* | `2606:50c0:8002::153` |
-| AAAA | *(vacío)* | `2606:50c0:8003::153` |
+| A | *(raíz)* | `185.199.108.153` |
+| A | *(raíz)* | `185.199.109.153` |
+| A | *(raíz)* | `185.199.110.153` |
+| A | *(raíz)* | `185.199.111.153` |
+| AAAA | *(raíz)* | `2606:50c0:8000::153` |
+| AAAA | *(raíz)* | `2606:50c0:8001::153` |
+| AAAA | *(raíz)* | `2606:50c0:8002::153` |
+| AAAA | *(raíz)* | `2606:50c0:8003::153` |
 | CNAME | `www` | `cristopherjose99-a11y.github.io` |
+| MX | *(raíz)* | `fwd1.porkbun.com` (prio 10) |
+| MX | *(raíz)* | `fwd2.porkbun.com` (prio 20) |
+| TXT | *(raíz)* | `v=spf1 include:_spf.porkbun.com ~all` |
 
-El CNAME apunta solo al dominio de GitHub, **sin** `/lamujerquemanifiesta` al final.
+Los dos MX y el TXT son el reenvío de correo gratuito de Porkbun. Siguen ahí sin usar:
+con ellos puedes crear `hola@lamujerquemanifiesta.com` desde el panel de Porkbun, sin coste.
 
-Si al comprar quedó algún registro de parking, bórralo antes.
+## Mantenimiento
 
-## Paso 3 — Avisarme
+**Renovación automática.** Actívala en Porkbun si no lo hiciste al comprar. Si el dominio
+caduca, la web desaparece y alguien puede quedarse con el nombre.
 
-Cuando los DNS estén puestos, dímelo y yo hago lo que falta:
-
-1. Añadir el archivo `CNAME` al repositorio con el dominio dentro.
-2. Configurar el dominio en los ajustes de Pages.
-3. Activar **Enforce HTTPS** (el certificado es gratis y lo emite GitHub).
-4. Actualizar `canonical` y las metas Open Graph de `index.html` y `artifact.html`.
-5. Comprobar que `lamujerquemanifiesta.com` y `www.lamujerquemanifiesta.com` responden.
-
-**No añado el archivo `CNAME` antes de que el DNS esté listo a propósito**: en cuanto
-existe, GitHub deja de servir la URL de github.io y redirige al dominio nuevo. Si el DNS
-todavía no resuelve, la web se queda caída hasta que propague.
-
-## Cuánto tarda
-
-La propagación suele ser de 10 minutos a 1 hora, aunque formalmente puede llegar a 24.
-El certificado HTTPS lo emite GitHub solo, unos 15 minutos después de que el DNS resuelva.
-
-## Comprobar que funciona
+**Comprobar que todo sigue en pie:**
 
 ```bash
-dig +short lamujerquemanifiesta.com
+curl -sI https://lamujerquemanifiesta.com | head -1
 ```
 
-Tiene que devolver las cuatro IPs `185.199.10x.153`.
+Tiene que devolver `HTTP/2 200`.
+
+## Si algo se rompe
+
+| Síntoma | Causa habitual |
+|---|---|
+| «Domain's DNS record could not be retrieved» en GitHub | El DNS aún propaga. Espera y vuelve a verificar en Settings → Pages. |
+| Sale la página de parking de Porkbun | Volvió a aparecer el registro ALIAS o el CNAME `*`. Bórralos. |
+| Aviso de certificado inválido | GitHub todavía no emitió el certificado. Tarda unos 15 minutos tras propagar el DNS. |
+| 404 en el dominio pero la URL de github.io funciona | Falta el archivo `CNAME` en la raíz del repositorio. |
