@@ -1,0 +1,821 @@
+<title>La Mujer que Manifiesta</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap">
+
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          crema:   '#FDFBF7',
+          lino:    '#FAF6EE',
+          arena:   '#E8DED1',
+          grafito: '#2A2421',
+          oro:     '#D4AF37',
+          oroviejo:'#C5A059'
+        },
+        fontFamily: {
+          display: ['"Playfair Display"', 'Georgia', 'Times New Roman', 'serif'],
+          sans:    ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif']
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  /* Minimal luxury: una columna editorial centrada, secciones alternadas crema/lino,
+     el oro reservado para CTAs y filetes finos. Un solo tema, por decision de marca. */
+  :root {
+    --bg:        #FDFBF7;
+    --bg-alt:    #FAF6EE;
+    --surface:   #E8DED1;
+    --fg:        #2A2421;
+    --fg-soft:   #6B6058;
+    --gold:      #D4AF37;
+    --gold-deep: #C5A059;
+    --hairline:  rgba(212,175,55,.32);
+    color-scheme: light;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: '"Plus Jakarta Sans"', 'Plus Jakarta Sans', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .display { text-wrap: balance; }
+  p { text-wrap: pretty; }
+
+  .wrap { width: 100%; max-width: 1120px; margin-inline: auto; padding-inline: 20px; }
+  .measure { max-width: 62ch; }
+
+  .eyebrow {
+    font-size: .6875rem; letter-spacing: .22em; text-transform: uppercase;
+    font-weight: 600; color: var(--gold-deep);
+  }
+
+  .hairline { border-color: var(--hairline); }
+
+  .rule {
+    height: 1px; border: 0;
+    background: linear-gradient(90deg, transparent, var(--hairline) 18%, var(--hairline) 82%, transparent);
+  }
+
+  /* Boton dorado con brillo que cruza al pasar el cursor */
+  .btn-gold {
+    position: relative; overflow: hidden; isolation: isolate;
+    background: linear-gradient(135deg, #E0C25B 0%, var(--gold) 46%, var(--gold-deep) 100%);
+    color: #231E1A;
+    box-shadow: 0 1px 0 rgba(255,255,255,.5) inset, 0 12px 28px -12px rgba(170,133,30,.65);
+    transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+  }
+  .btn-gold:hover {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-deep) 55%, #B8954F 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 1px 0 rgba(255,255,255,.4) inset, 0 18px 34px -14px rgba(170,133,30,.75);
+  }
+  .btn-gold:active { transform: translateY(0); }
+  .btn-gold::after {
+    content: ''; position: absolute; inset: 0 auto 0 -60%; width: 45%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,.55), transparent);
+    transform: skewX(-18deg); z-index: -1;
+  }
+  .btn-gold:hover::after { animation: sheen .9s ease forwards; }
+  @keyframes sheen { to { left: 115%; } }
+
+  .btn-gold:focus-visible,
+  a:focus-visible, summary:focus-visible, button:focus-visible {
+    outline: 2px solid var(--gold-deep); outline-offset: 3px; border-radius: 2px;
+  }
+
+  /* Mockup del kit: tres piezas apiladas en perspectiva */
+  .kit-stage { perspective: 1400px; }
+  .kit {
+    transform-style: preserve-3d;
+    transform: rotateY(-16deg) rotateX(6deg);
+    transition: transform .7s cubic-bezier(.2,.7,.3,1);
+  }
+  .kit-stage:hover .kit { transform: rotateY(-9deg) rotateX(3deg) translateY(-6px); }
+
+  .book {
+    background:
+      linear-gradient(118deg, rgba(255,255,255,.55) 0%, transparent 34%),
+      linear-gradient(160deg, #F3EADC 0%, #E8DED1 52%, #D8CBB8 100%);
+    box-shadow:
+      0 1px 0 rgba(255,255,255,.75) inset,
+      -1px 0 0 rgba(255,255,255,.6) inset,
+      38px 44px 70px -30px rgba(42,36,33,.42),
+      0 2px 8px rgba(42,36,33,.10);
+  }
+  .book::before { /* lomo */
+    content: ''; position: absolute; inset: 0 auto 0 0; width: 13px;
+    background: linear-gradient(90deg, #C9B99F, #E3D8C6 45%, rgba(227,216,198,0) 100%);
+    border-right: 1px solid rgba(255,255,255,.45);
+  }
+  .book::after { /* brillo dorado que se desplaza */
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(112deg, transparent 36%, rgba(212,175,55,.40) 50%, transparent 64%);
+    background-size: 280% 100%;
+    animation: glint 7s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes glint {
+    0%, 100% { background-position: 118% 0; }
+    50%      { background-position: -18% 0; }
+  }
+
+  .plate { /* trackers y audios detras del libro */
+    background: linear-gradient(155deg, #FFFDF9 0%, #F4ECDF 100%);
+    box-shadow: 18px 22px 40px -22px rgba(42,36,33,.34), 0 1px 0 rgba(255,255,255,.8) inset;
+  }
+
+  .card {
+    background: linear-gradient(165deg, #EFE7DA 0%, var(--surface) 100%);
+    border: 1px solid var(--hairline);
+    box-shadow: 0 1px 0 rgba(255,255,255,.65) inset, 0 16px 34px -26px rgba(42,36,33,.35);
+  }
+
+  .quiet-card {
+    background: #FFFDF9;
+    border: 1px solid rgba(42,36,33,.08);
+  }
+
+  .num {
+    font-family: '"Playfair Display"', 'Playfair Display', Georgia, serif;
+    font-size: 2.25rem; line-height: 1; color: var(--gold-deep);
+    font-variant-numeric: tabular-nums;
+  }
+
+  details > summary { cursor: pointer; list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] .chev { transform: rotate(45deg); }
+  .chev { transition: transform .25s ease; }
+
+  .count { font-variant-numeric: tabular-nums; }
+
+  /* Entrada suave desde un estado ya visible */
+  .rise { animation: rise .7s cubic-bezier(.2,.7,.3,1) both; }
+  @keyframes rise { from { opacity: .55; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .kit { transform: none; }
+  }
+</style>
+
+<!-- ───────────────────────── TOP BAR DE URGENCIA ───────────────────────── -->
+<div class="bg-oro text-grafito text-center font-semibold"
+     style="padding-block:.6rem; padding-top:calc(.6rem + env(safe-area-inset-top, 0px));">
+  <div class="wrap">
+    <p class="text-[.72rem] sm:text-sm tracking-[.09em] uppercase leading-snug">
+      ✨ Oferta de lanzamiento — 69% de descuento disponible hoy
+    </p>
+  </div>
+</div>
+
+<!-- ───────────────────────── HERO ───────────────────────── -->
+<header class="relative overflow-hidden">
+  <div aria-hidden="true" class="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 h-[520px] w-[760px] max-w-[130%] rounded-full"
+       style="background:radial-gradient(ellipse at center, rgba(212,175,55,.16), rgba(212,175,55,0) 68%);"></div>
+
+  <div class="wrap relative" style="padding-block:clamp(2.75rem,7vw,5.25rem);">
+    <div class="grid gap-x-14 gap-y-12 lg:grid-cols-[1.05fr_.95fr] lg:items-center">
+
+      <div class="rise" style="min-width:0;">
+        <p class="eyebrow mb-5">Kit digital · Método de 21 días</p>
+
+        <h1 class="font-display font-medium text-grafito leading-[1.08] tracking-[-.015em]"
+            style="font-size:clamp(2.1rem,5.4vw,3.6rem);">
+          Reprograma tu mente subconsciente, rompe el ciclo de escasez y atrae abundancia en
+          <em class="not-italic relative whitespace-nowrap" style="color:var(--gold-deep);">21 días</em>
+        </h1>
+
+        <h2 class="mt-6 measure text-[1.0625rem] sm:text-xl leading-relaxed font-light"
+            style="color:var(--fg-soft);">
+          El método práctico paso a paso para liberar tus bloqueos con el dinero, tus proyectos y tu poder interior.
+        </h2>
+
+        <hr class="rule my-8">
+
+        <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+          <a href="#oferta"
+             class="btn-gold inline-flex items-center justify-center gap-2 rounded-full font-sans font-bold uppercase tracking-[.1em] text-[.78rem] sm:text-[.82rem] text-center px-8 py-[1.1rem]">
+            ¡Quiero mi kit ahora por $17!
+          </a>
+          <p class="text-[.78rem] leading-relaxed" style="color:var(--fg-soft);">
+            Acceso inmediato · Pago único<br class="hidden sm:block">
+            Garantía de 7 días
+          </p>
+        </div>
+
+        <ul class="mt-9 flex flex-wrap items-center gap-x-7 gap-y-3 text-[.74rem] uppercase tracking-[.14em]"
+            style="color:var(--fg-soft);">
+          <li>Libro digital</li>
+          <li aria-hidden="true" style="color:var(--hairline);">◆</li>
+          <li>Trackers imprimibles</li>
+          <li aria-hidden="true" style="color:var(--hairline);">◆</li>
+          <li>Audios guiados</li>
+        </ul>
+      </div>
+
+      <!-- Mockup del kit -->
+      <div class="kit-stage flex justify-center lg:justify-end" style="min-width:0;">
+        <div class="kit relative" style="width:min(100%,380px); aspect-ratio:1/1.08; max-width:100%;">
+
+          <div class="plate absolute rounded-[10px] hairline" style="border:1px solid var(--hairline); inset:14% -4% 26% 34%; transform:translateZ(-60px) rotate(7deg);"></div>
+          <div class="plate absolute rounded-[10px]" style="border:1px solid var(--hairline); inset:26% 6% 12% 26%; transform:translateZ(-30px) rotate(3deg);"></div>
+
+          <div class="book absolute rounded-[6px] overflow-hidden"
+               style="inset:4% 22% 8% 2%; transform:translateZ(20px);">
+            <div class="absolute inset-0 flex flex-col justify-between items-center text-center"
+                 style="padding:clamp(1.25rem,4.5%,2rem) clamp(1rem,8%,1.6rem) clamp(1.25rem,5%,2rem) calc(13px + clamp(1rem,7%,1.5rem));">
+              <div>
+                <p class="eyebrow" style="font-size:.5rem; letter-spacing:.26em;">Kit digital</p>
+                <div class="mx-auto mt-3 mb-4" style="width:30px; height:1px; background:var(--gold-deep);"></div>
+              </div>
+
+              <div>
+                <h3 class="font-display leading-[1.12] tracking-[-.01em]" style="font-size:clamp(1.35rem,5.2vw,1.85rem);">
+                  La Mujer<br>que <em style="color:var(--gold-deep);">Manifiesta</em>
+                </h3>
+                <p class="mt-4 text-[.6rem] uppercase tracking-[.2em]" style="color:var(--fg-soft);">
+                  Método de 21 días
+                </p>
+              </div>
+
+              <div class="text-[.56rem] uppercase tracking-[.18em] leading-relaxed" style="color:var(--fg-soft);">
+                Libro · Trackers · Audios
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<!-- ───────────────────────── DOLOR ───────────────────────── -->
+<section class="bg-lino">
+  <div class="wrap" style="padding-block:clamp(3.5rem,8vw,5.5rem);">
+    <div class="text-center">
+      <p class="eyebrow">Antes de seguir</p>
+      <h2 class="mt-4 font-display font-medium leading-[1.14] tracking-[-.01em] mx-auto measure"
+          style="font-size:clamp(1.75rem,4.2vw,2.6rem);">
+        Si algo de esto te suena familiar, estás en el lugar correcto
+      </h2>
+    </div>
+
+    <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="quiet-card rounded-xl p-6" style="min-width:0;">
+        <p class="leading-relaxed">Te esfuerzas, trabajas de más, y el dinero siempre alcanza <strong class="font-semibold">justo para lo justo</strong>.</p>
+      </div>
+      <div class="quiet-card rounded-xl p-6" style="min-width:0;">
+        <p class="leading-relaxed">Dices que quieres abundancia y por dentro algo te susurra <strong class="font-semibold">“pero no para ti”</strong>.</p>
+      </div>
+      <div class="quiet-card rounded-xl p-6" style="min-width:0;">
+        <p class="leading-relaxed">Empiezas proyectos con fuego y los abandonas en la <strong class="font-semibold">semana tres</strong>.</p>
+      </div>
+      <div class="quiet-card rounded-xl p-6" style="min-width:0;">
+        <p class="leading-relaxed">Repites afirmaciones frente al espejo y <strong class="font-semibold">no sientes nada</strong>.</p>
+      </div>
+      <div class="quiet-card rounded-xl p-6" style="min-width:0;">
+        <p class="leading-relaxed">Sientes culpa cuando pides más, como si desear <strong class="font-semibold">fuera egoísmo</strong>.</p>
+      </div>
+      <div class="quiet-card rounded-xl p-6" style="min-width:0;">
+        <p class="leading-relaxed">Has leído sobre manifestación, pero nadie te dijo <strong class="font-semibold">qué hacer cada día</strong>.</p>
+      </div>
+    </div>
+
+    <p class="mt-12 mx-auto measure text-center font-display italic leading-relaxed"
+       style="font-size:clamp(1.15rem,2.6vw,1.5rem);">
+      No te falta disciplina. Te falta reprogramar la parte de ti que decide, en silencio, cuánto mereces recibir.
+    </p>
+  </div>
+</section>
+
+<!-- ───────────────────────── EL PORQUÉ ───────────────────────── -->
+<section>
+  <div class="wrap" style="padding-block:clamp(3.5rem,8vw,5.5rem);">
+    <div class="grid gap-12 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
+      <div style="min-width:0;">
+        <p class="eyebrow">El problema real</p>
+        <h2 class="mt-4 font-display font-medium leading-[1.14] tracking-[-.01em]"
+            style="font-size:clamp(1.75rem,4.2vw,2.6rem);">
+          El problema no eres tú. Es tu programación.
+        </h2>
+        <div class="mt-7 space-y-5 measure leading-relaxed" style="color:var(--fg-soft);">
+          <p>Tu mente consciente decide una parte mínima de tu día. El resto lo gobierna un sistema de creencias que se instaló antes de que supieras elegir: lo que escuchaste sobre el dinero en tu casa, lo que viste sufrir a tu madre, lo que aprendiste a callar para no incomodar.</p>
+          <p>Por eso la fuerza de voluntad sola no funciona. Puedes querer ganar más y seguir sabotéandote, porque una parte de ti aprendió que tener es peligroso.</p>
+          <p class="text-grafito font-medium">Las creencias no se discuten. Se sustituyen. Y eso se hace con repetición consciente, cuerpo presente y un plan diario que no te deje improvisar.</p>
+        </div>
+      </div>
+
+      <div class="card rounded-2xl" style="padding:clamp(1.75rem,4vw,2.75rem); min-width:0;">
+        <p class="eyebrow">Qué cambia en 21 días</p>
+        <dl class="mt-7 space-y-6">
+          <div class="flex gap-5 items-baseline">
+            <dt class="num shrink-0" style="width:2.6rem;">01</dt>
+            <dd><strong class="font-semibold block">Ves el patrón</strong><span style="color:var(--fg-soft);">Nombras la creencia exacta que te mantiene en el mismo lugar.</span></dd>
+          </div>
+          <hr class="rule">
+          <div class="flex gap-5 items-baseline">
+            <dt class="num shrink-0" style="width:2.6rem;">02</dt>
+            <dd><strong class="font-semibold block">Lo sueltas</strong><span style="color:var(--fg-soft);">Dejas de pelear con la emoción y aprendes a atravesarla.</span></dd>
+          </div>
+          <hr class="rule">
+          <div class="flex gap-5 items-baseline">
+            <dt class="num shrink-0" style="width:2.6rem;">03</dt>
+            <dd><strong class="font-semibold block">Instalas lo nuevo</strong><span style="color:var(--fg-soft);">Repites el nuevo guion hasta que tu cuerpo lo reconoce como verdad.</span></dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────── QUÉ INCLUYE ───────────────────────── -->
+<section class="bg-lino" id="incluye">
+  <div class="wrap" style="padding-block:clamp(3.5rem,8vw,5.5rem);">
+    <div class="text-center">
+      <p class="eyebrow">El kit completo</p>
+      <h2 class="mt-4 font-display font-medium leading-[1.14] tracking-[-.01em] mx-auto measure"
+          style="font-size:clamp(1.75rem,4.2vw,2.6rem);">
+        Tres piezas que trabajan juntas
+      </h2>
+      <p class="mt-5 mx-auto measure leading-relaxed" style="color:var(--fg-soft);">
+        Una para entender, una para sostener el hábito y una para hablarle directo al subconsciente.
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-6 md:grid-cols-3">
+      <article class="card rounded-2xl flex flex-col" style="padding:clamp(1.5rem,3.5vw,2.1rem); min-width:0;">
+        <p class="eyebrow">Pieza uno</p>
+        <h3 class="mt-3 font-display text-2xl leading-snug">El libro digital</h3>
+        <p class="mt-4 leading-relaxed grow" style="color:var(--fg-soft);">
+          El método completo en 7 capítulos: de dónde viene tu relación con el dinero, cómo detectar el bloqueo que repites y qué hacer con él. Lenguaje claro, sin misticismo vacío.
+        </p>
+        <p class="mt-6 pt-5 text-[.72rem] uppercase tracking-[.16em]" style="border-top:1px solid var(--hairline); color:var(--gold-deep);">
+          PDF · Para leer en el celular
+        </p>
+      </article>
+
+      <article class="card rounded-2xl flex flex-col" style="padding:clamp(1.5rem,3.5vw,2.1rem); min-width:0;">
+        <p class="eyebrow">Pieza dos</p>
+        <h3 class="mt-3 font-display text-2xl leading-snug">Los trackers imprimibles</h3>
+        <p class="mt-4 leading-relaxed grow" style="color:var(--fg-soft);">
+          Tu registro de 21 días, el mapa de creencias heredadas, la rueda de áreas de vida y el diario de evidencias. Imprímelos o escríbelos en digital.
+        </p>
+        <p class="mt-6 pt-5 text-[.72rem] uppercase tracking-[.16em]" style="border-top:1px solid var(--hairline); color:var(--gold-deep);">
+          Imprimible · Tamaño carta y A4
+        </p>
+      </article>
+
+      <article class="card rounded-2xl flex flex-col" style="padding:clamp(1.5rem,3.5vw,2.1rem); min-width:0;">
+        <p class="eyebrow">Pieza tres</p>
+        <h3 class="mt-3 font-display text-2xl leading-snug">Los audios guiados</h3>
+        <p class="mt-4 leading-relaxed grow" style="color:var(--fg-soft);">
+          Sesiones de reprogramación para escuchar al despertar y antes de dormir, cuando la mente está más receptiva. Con tu voz interna trabajando a favor.
+        </p>
+        <p class="mt-6 pt-5 text-[.72rem] uppercase tracking-[.16em]" style="border-top:1px solid var(--hairline); color:var(--gold-deep);">
+          MP3 · Descarga y escucha sin internet
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────── LAS 3 SEMANAS ───────────────────────── -->
+<section>
+  <div class="wrap" style="padding-block:clamp(3.5rem,8vw,5.5rem);">
+    <div class="text-center">
+      <p class="eyebrow">El camino</p>
+      <h2 class="mt-4 font-display font-medium leading-[1.14] tracking-[-.01em] mx-auto measure"
+          style="font-size:clamp(1.75rem,4.2vw,2.6rem);">
+        Tus 21 días, semana por semana
+      </h2>
+    </div>
+
+    <ol class="mt-12 grid gap-6 md:grid-cols-3">
+      <li class="quiet-card rounded-2xl" style="padding:clamp(1.5rem,3.5vw,2rem); min-width:0;">
+        <p class="num">01</p>
+        <p class="mt-4 eyebrow">Días 1 – 7</p>
+        <h3 class="mt-2 font-display text-xl">Diagnóstico</h3>
+        <p class="mt-3 leading-relaxed" style="color:var(--fg-soft);">
+          Escribes tu historia con el dinero y descubres cuál de las creencias de tu familia sigues cargando. Sin juicio, solo claridad.
+        </p>
+      </li>
+      <li class="quiet-card rounded-2xl" style="padding:clamp(1.5rem,3.5vw,2rem); min-width:0;">
+        <p class="num">02</p>
+        <p class="mt-4 eyebrow">Días 8 – 14</p>
+        <h3 class="mt-2 font-display text-xl">Liberación</h3>
+        <p class="mt-3 leading-relaxed" style="color:var(--fg-soft);">
+          Trabajas la culpa, el miedo a incomodar y la vergüenza de pedir. Aquí entran los audios y el ejercicio de perdón financiero.
+        </p>
+      </li>
+      <li class="quiet-card rounded-2xl" style="padding:clamp(1.5rem,3.5vw,2rem); min-width:0;">
+        <p class="num">03</p>
+        <p class="mt-4 eyebrow">Días 15 – 21</p>
+        <h3 class="mt-2 font-display text-xl">Creación</h3>
+        <p class="mt-3 leading-relaxed" style="color:var(--fg-soft);">
+          Instalas el guion nuevo, defines tu petición con precisión y registras la primera evidencia de que algo se movió.
+        </p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ───────────────────────── TESTIMONIOS ───────────────────────── -->
+<section class="bg-lino">
+  <div class="wrap" style="padding-block:clamp(3.5rem,8vw,5.5rem);">
+    <div class="text-center">
+      <p class="eyebrow">Lo que dicen</p>
+      <h2 class="mt-4 font-display font-medium leading-[1.14] tracking-[-.01em] mx-auto measure"
+          style="font-size:clamp(1.75rem,4.2vw,2.6rem);">
+        Mujeres que ya hicieron los 21 días
+      </h2>
+    </div>
+
+    <div class="mt-12 grid gap-6 md:grid-cols-3">
+      <figure class="quiet-card rounded-2xl relative" style="padding:clamp(1.5rem,3.5vw,2rem); min-width:0;">
+        <span class="absolute right-4 top-4 text-[.55rem] font-bold uppercase tracking-[.16em] rounded-full px-2 py-1"
+              style="background:var(--surface); color:var(--fg-soft);">Ejemplo</span>
+        <p class="font-display text-3xl leading-none" style="color:var(--gold-deep);">“</p>
+        <blockquote class="mt-2 leading-relaxed">
+          Llevaba años diciendo que quería cobrar más y no me atrevía a mandar la propuesta. En la semana dos la mandé. Me dijeron sí.
+        </blockquote>
+        <figcaption class="mt-5 pt-4 text-[.78rem]" style="border-top:1px solid rgba(42,36,33,.08); color:var(--fg-soft);">
+          <strong class="font-semibold text-grafito block">Nombre de la clienta</strong>Ciudad · Ocupación
+        </figcaption>
+      </figure>
+
+      <figure class="quiet-card rounded-2xl relative" style="padding:clamp(1.5rem,3.5vw,2rem); min-width:0;">
+        <span class="absolute right-4 top-4 text-[.55rem] font-bold uppercase tracking-[.16em] rounded-full px-2 py-1"
+              style="background:var(--surface); color:var(--fg-soft);">Ejemplo</span>
+        <p class="font-display text-3xl leading-none" style="color:var(--gold-deep);">“</p>
+        <blockquote class="mt-2 leading-relaxed">
+          Los trackers fueron lo que me hizo seguir. Por primera vez terminé algo de 21 días sin abandonarlo a la mitad.
+        </blockquote>
+        <figcaption class="mt-5 pt-4 text-[.78rem]" style="border-top:1px solid rgba(42,36,33,.08); color:var(--fg-soft);">
+          <strong class="font-semibold text-grafito block">Nombre de la clienta</strong>Ciudad · Ocupación
+        </figcaption>
+      </figure>
+
+      <figure class="quiet-card rounded-2xl relative" style="padding:clamp(1.5rem,3.5vw,2rem); min-width:0;">
+        <span class="absolute right-4 top-4 text-[.55rem] font-bold uppercase tracking-[.16em] rounded-full px-2 py-1"
+              style="background:var(--surface); color:var(--fg-soft);">Ejemplo</span>
+        <p class="font-display text-3xl leading-none" style="color:var(--gold-deep);">“</p>
+        <blockquote class="mt-2 leading-relaxed">
+          El capítulo sobre la culpa me rompió. Entendí que no era falta de ganas, era miedo a que me vieran teniendo.
+        </blockquote>
+        <figcaption class="mt-5 pt-4 text-[.78rem]" style="border-top:1px solid rgba(42,36,33,.08); color:var(--fg-soft);">
+          <strong class="font-semibold text-grafito block">Nombre de la clienta</strong>Ciudad · Ocupación
+        </figcaption>
+      </figure>
+    </div>
+
+    <p class="mt-7 text-center text-[.74rem]" style="color:var(--fg-soft);">
+      Reemplaza estos tres bloques con testimonios reales antes de publicar.
+    </p>
+  </div>
+</section>
+
+<!-- ───────────────────────── BONOS ───────────────────────── -->
+<section>
+  <div class="wrap" style="padding-block:clamp(3.5rem,8vw,5.5rem);">
+    <div class="text-center">
+      <p class="eyebrow">Incluidos hoy</p>
+      <h2 class="mt-4 font-display font-medium leading-[1.14] tracking-[-.01em] mx-auto measure"
+          style="font-size:clamp(1.75rem,4.2vw,2.6rem);">
+        Tres bonos que se van con el lanzamiento
+      </h2>
+    </div>
+
+    <div class="mt-12 grid gap-6 md:grid-cols-3">
+      <article class="card rounded-2xl" style="padding:clamp(1.5rem,3.5vw,2rem); min-width:0;">
+        <div class="flex items-center justify-between gap-3">
+          <p class="eyebrow">Bono 01</p>
+          <p class="text-[.78rem] font-semibold" style="color:var(--gold-deep);">Valor $19</p>
+        </div>
+        <h3 class="mt-3 font-display text-xl leading-snug">Meditación «Dinero sin culpa»</h3>
+        <p class="mt-3 leading-relaxed" style="color:var(--fg-soft);">
+          Doce minutos para separar el merecimiento del esfuerzo. La que más piden repetir.
+        </p>
+      </article>
+
+      <article class="card rounded-2xl" style="padding:clamp(1.5rem,3.5vw,2rem); min-width:0;">
+        <div class="flex items-center justify-between gap-3">
+          <p class="eyebrow">Bono 02</p>
+          <p class="text-[.78rem] font-semibold" style="color:var(--gold-deep);">Valor $14</p>
+        </div>
+        <h3 class="mt-3 font-display text-xl leading-snug">Tu guion de afirmaciones</h3>
+        <p class="mt-3 leading-relaxed" style="color:var(--fg-soft);">
+          Plantilla para escribir afirmaciones que tu mente sí acepta, en lugar de frases que rechaza.
+        </p>
+      </article>
+
+      <article class="card rounded-2xl" style="padding:clamp(1.5rem,3.5vw,2rem); min-width:0;">
+        <div class="flex items-center justify-between gap-3">
+          <p class="eyebrow">Bono 03</p>
+          <p class="text-[.78rem] font-semibold" style="color:var(--gold-deep);">Valor $12</p>
+        </div>
+        <h3 class="mt-3 font-display text-xl leading-snug">Ritual de luna nueva</h3>
+        <p class="mt-3 leading-relaxed" style="color:var(--fg-soft);">
+          Checklist de una página para plantear tu petición del mes con claridad y cerrarla bien.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────── OFERTA ───────────────────────── -->
+<section class="bg-lino" id="oferta">
+  <div class="wrap" style="padding-block:clamp(3.5rem,8vw,5.5rem);">
+    <div class="mx-auto" style="max-width:720px;">
+      <div class="text-center">
+        <p class="eyebrow">Oferta de lanzamiento</p>
+        <h2 class="mt-4 font-display font-medium leading-[1.14] tracking-[-.01em]"
+            style="font-size:clamp(1.75rem,4.2vw,2.6rem);">
+          Todo el kit, hoy, por menos de lo que cuesta un café a la semana
+        </h2>
+      </div>
+
+      <div class="card rounded-[20px] mt-10" style="padding:clamp(1.75rem,4.5vw,3rem);">
+
+        <ul class="space-y-3.5">
+          <li class="flex items-baseline justify-between gap-4 text-[.95rem]">
+            <span>Libro digital «La Mujer que Manifiesta»</span>
+            <span class="shrink-0 count" style="color:var(--fg-soft);">$27</span>
+          </li>
+          <li class="flex items-baseline justify-between gap-4 text-[.95rem]">
+            <span>Trackers imprimibles de 21 días</span>
+            <span class="shrink-0 count" style="color:var(--fg-soft);">$15</span>
+          </li>
+          <li class="flex items-baseline justify-between gap-4 text-[.95rem]">
+            <span>Audios de reprogramación</span>
+            <span class="shrink-0 count" style="color:var(--fg-soft);">$13</span>
+          </li>
+          <li class="flex items-baseline justify-between gap-4 text-[.95rem]">
+            <span>Los tres bonos de lanzamiento</span>
+            <span class="shrink-0 count" style="color:var(--fg-soft);">$45</span>
+          </li>
+        </ul>
+
+        <hr class="rule my-7">
+
+        <div class="text-center">
+          <p class="text-[.8rem] uppercase tracking-[.16em]" style="color:var(--fg-soft);">
+            Valor real <s class="count" style="text-decoration-thickness:1px;">$100</s>
+          </p>
+          <p class="mt-3 font-display leading-none count" style="font-size:clamp(3.4rem,11vw,4.75rem);">
+            <span style="font-size:.42em; vertical-align:.55em; color:var(--gold-deep);">$</span>17
+            <span class="font-sans font-light" style="font-size:.2em; letter-spacing:.14em; vertical-align:.7em; color:var(--fg-soft);">USD</span>
+          </p>
+          <p class="mt-3 font-semibold" style="color:var(--gold-deep);">Pago único · 69% de descuento</p>
+        </div>
+
+        <div class="mt-8 rounded-xl text-center" style="background:rgba(253,251,247,.72); border:1px solid var(--hairline); padding:1.1rem 1rem;">
+          <p class="text-[.7rem] uppercase tracking-[.18em]" style="color:var(--fg-soft);">El precio de lanzamiento termina en</p>
+          <p id="countdown" class="mt-2 font-display count" style="font-size:clamp(1.6rem,6vw,2.1rem); letter-spacing:.02em;">
+            <span aria-hidden="true">—</span>
+          </p>
+        </div>
+
+        <a href="#"
+           class="btn-gold mt-8 flex items-center justify-center rounded-full font-sans font-bold uppercase tracking-[.1em] text-center"
+           style="font-size:clamp(.78rem,2.6vw,.9rem); padding:1.25rem 1.5rem;">
+          Sí, quiero mi kit por $17
+        </a>
+
+        <p class="mt-5 text-center text-[.76rem] leading-relaxed" style="color:var(--fg-soft);">
+          Acceso inmediato por correo · Pago seguro<br>
+          Garantía de devolución de 7 días
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────── GARANTÍA ───────────────────────── -->
+<section>
+  <div class="wrap" style="padding-block:clamp(3rem,7vw,4.5rem);">
+    <div class="mx-auto flex flex-col sm:flex-row items-center gap-8 text-center sm:text-left" style="max-width:820px;">
+      <div class="shrink-0 grid place-items-center rounded-full"
+           style="width:104px; height:104px; border:1px solid var(--hairline); background:linear-gradient(160deg,#FFFDF9,#F2E9DA);">
+        <div class="text-center">
+          <p class="font-display leading-none count" style="font-size:2.1rem; color:var(--gold-deep);">7</p>
+          <p class="text-[.56rem] uppercase tracking-[.16em] mt-1" style="color:var(--fg-soft);">días</p>
+        </div>
+      </div>
+      <div style="min-width:0;">
+        <h2 class="font-display font-medium" style="font-size:clamp(1.4rem,3.2vw,1.9rem);">Pruébalo sin riesgo</h2>
+        <p class="mt-3 leading-relaxed" style="color:var(--fg-soft);">
+          Si haces los ejercicios de la primera semana y sientes que esto no es para ti, escríbenos dentro de los primeros 7 días y te devolvemos el dinero completo. Sin cuestionarios, sin incomodidad.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────── PARA QUIÉN ───────────────────────── -->
+<section class="bg-lino">
+  <div class="wrap" style="padding-block:clamp(3.5rem,8vw,5.5rem);">
+    <div class="grid gap-6 md:grid-cols-2 mx-auto" style="max-width:920px;">
+      <div class="quiet-card rounded-2xl" style="padding:clamp(1.5rem,3.5vw,2.1rem); min-width:0;">
+        <p class="eyebrow">Es para ti si</p>
+        <ul class="mt-5 space-y-3.5">
+          <li class="flex gap-3"><span style="color:var(--gold-deep);">◆</span><span>Estás lista para mirar de frente tu relación con el dinero.</span></li>
+          <li class="flex gap-3"><span style="color:var(--gold-deep);">◆</span><span>Quieres un plan diario, no más teoría acumulada.</span></li>
+          <li class="flex gap-3"><span style="color:var(--gold-deep);">◆</span><span>Puedes dedicarle 15 minutos al día durante tres semanas.</span></li>
+          <li class="flex gap-3"><span style="color:var(--gold-deep);">◆</span><span>Te cansaste de empezar y no terminar.</span></li>
+        </ul>
+      </div>
+      <div class="quiet-card rounded-2xl" style="padding:clamp(1.5rem,3.5vw,2.1rem); min-width:0;">
+        <p class="eyebrow" style="color:var(--fg-soft);">No es para ti si</p>
+        <ul class="mt-5 space-y-3.5" style="color:var(--fg-soft);">
+          <li class="flex gap-3"><span>·</span><span>Buscas que el dinero llegue sin que tú muevas nada.</span></li>
+          <li class="flex gap-3"><span>·</span><span>Esperas resultados sin escribir ni un ejercicio.</span></li>
+          <li class="flex gap-3"><span>·</span><span>Quieres asesoría financiera o de inversión. Esto no lo es.</span></li>
+          <li class="flex gap-3"><span>·</span><span>Atraviesas una crisis que necesita acompañamiento profesional.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────── FAQ ───────────────────────── -->
+<section>
+  <div class="wrap" style="padding-block:clamp(3.5rem,8vw,5.5rem);">
+    <div class="mx-auto" style="max-width:760px;">
+      <div class="text-center">
+        <p class="eyebrow">Dudas frecuentes</p>
+        <h2 class="mt-4 font-display font-medium leading-[1.14] tracking-[-.01em]"
+            style="font-size:clamp(1.75rem,4.2vw,2.6rem);">
+          Lo que suelen preguntarnos
+        </h2>
+      </div>
+
+      <div class="mt-10 divide-y" style="border-top:1px solid var(--hairline); border-bottom:1px solid var(--hairline); border-color:var(--hairline);">
+
+        <details class="group">
+          <summary class="flex items-start justify-between gap-5 py-5">
+            <span class="font-medium leading-snug">¿Cómo y cuándo recibo el kit?</span>
+            <span class="chev shrink-0 mt-1 font-display text-xl leading-none" style="color:var(--gold-deep);">+</span>
+          </summary>
+          <p class="pb-6 leading-relaxed" style="color:var(--fg-soft);">
+            Al confirmarse el pago te llega un correo con el enlace de descarga, normalmente en menos de cinco minutos. Son archivos digitales: no esperas envío ni pagas por entrega.
+          </p>
+        </details>
+
+        <details class="group">
+          <summary class="flex items-start justify-between gap-5 py-5">
+            <span class="font-medium leading-snug">Nunca he trabajado la manifestación. ¿Me va a servir?</span>
+            <span class="chev shrink-0 mt-1 font-display text-xl leading-none" style="color:var(--gold-deep);">+</span>
+          </summary>
+          <p class="pb-6 leading-relaxed" style="color:var(--fg-soft);">
+            Está escrito para empezar desde cero. El libro explica cada concepto antes de pedirte que hagas algo con él, y los trackers te dicen exactamente qué toca cada día.
+          </p>
+        </details>
+
+        <details class="group">
+          <summary class="flex items-start justify-between gap-5 py-5">
+            <span class="font-medium leading-snug">¿Cuánto tiempo necesito al día?</span>
+            <span class="chev shrink-0 mt-1 font-display text-xl leading-none" style="color:var(--gold-deep);">+</span>
+          </summary>
+          <p class="pb-6 leading-relaxed" style="color:var(--fg-soft);">
+            Unos 15 minutos: un audio corto y una página del tracker. Está pensado para una mujer con trabajo, casa y poco tiempo libre.
+          </p>
+        </details>
+
+        <details class="group">
+          <summary class="flex items-start justify-between gap-5 py-5">
+            <span class="font-medium leading-snug">¿Puedo imprimir los trackers?</span>
+            <span class="chev shrink-0 mt-1 font-display text-xl leading-none" style="color:var(--gold-deep);">+</span>
+          </summary>
+          <p class="pb-6 leading-relaxed" style="color:var(--fg-soft);">
+            Sí, vienen listos en tamaño carta y A4. También puedes escribirlos en digital desde el celular o la tablet si prefieres no imprimir.
+          </p>
+        </details>
+
+        <details class="group">
+          <summary class="flex items-start justify-between gap-5 py-5">
+            <span class="font-medium leading-snug">¿El acceso caduca?</span>
+            <span class="chev shrink-0 mt-1 font-display text-xl leading-none" style="color:var(--gold-deep);">+</span>
+          </summary>
+          <p class="pb-6 leading-relaxed" style="color:var(--fg-soft);">
+            No. Descargas los archivos y son tuyos. Puedes repetir los 21 días cuantas veces quieras.
+          </p>
+        </details>
+
+        <details class="group">
+          <summary class="flex items-start justify-between gap-5 py-5">
+            <span class="font-medium leading-snug">¿Y si no me gusta?</span>
+            <span class="chev shrink-0 mt-1 font-display text-xl leading-none" style="color:var(--gold-deep);">+</span>
+          </summary>
+          <p class="pb-6 leading-relaxed" style="color:var(--fg-soft);">
+            Tienes 7 días para pedir la devolución completa escribiendo al correo de soporte. Te regresamos el pago sin pedirte explicaciones.
+          </p>
+        </details>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────── CTA FINAL ───────────────────────── -->
+<section class="relative overflow-hidden" style="background:linear-gradient(180deg,#FAF6EE,#F2E9DA);">
+  <div aria-hidden="true" class="pointer-events-none absolute -bottom-52 left-1/2 -translate-x-1/2 h-[480px] w-[720px] max-w-[130%] rounded-full"
+       style="background:radial-gradient(ellipse at center, rgba(212,175,55,.2), rgba(212,175,55,0) 70%);"></div>
+
+  <div class="wrap relative text-center" style="padding-block:clamp(4rem,9vw,6rem);">
+    <p class="eyebrow">Último paso</p>
+    <h2 class="mt-4 mx-auto font-display font-medium leading-[1.1] tracking-[-.015em]"
+        style="font-size:clamp(1.9rem,5vw,3.1rem); max-width:22ch;">
+      Dentro de 21 días vas a estar en el mismo lugar o en otro
+    </h2>
+    <p class="mt-6 mx-auto measure leading-relaxed" style="color:var(--fg-soft);">
+      La diferencia no la hace la suerte. La hace la mujer que decide, hoy, dejar de negociar con su propia escasez.
+    </p>
+
+    <a href="#oferta"
+       class="btn-gold mt-9 inline-flex items-center justify-center rounded-full font-sans font-bold uppercase tracking-[.1em]"
+       style="font-size:clamp(.78rem,2.6vw,.88rem); padding:1.25rem 2.5rem;">
+      Empezar hoy por $17
+    </a>
+
+    <p class="mt-5 text-[.76rem]" style="color:var(--fg-soft);">
+      Acceso inmediato · Garantía de 7 días · Pago único
+    </p>
+  </div>
+</section>
+
+<!-- ───────────────────────── FOOTER ───────────────────────── -->
+<footer class="bg-crema" style="border-top:1px solid var(--hairline);">
+  <div class="wrap" style="padding-block:2.75rem; padding-bottom:calc(2.75rem + 84px);">
+    <div class="flex flex-col sm:flex-row gap-7 sm:items-end sm:justify-between">
+      <div>
+        <p class="font-display text-lg leading-tight">La Mujer que Manifiesta</p>
+        <p class="mt-1 text-[.74rem] uppercase tracking-[.16em]" style="color:var(--fg-soft);">Kit digital · Método de 21 días</p>
+      </div>
+      <p class="text-[.74rem]" style="color:var(--fg-soft);">
+        Soporte: <span class="select-all font-medium text-grafito">hola@tudominio.com</span>
+      </p>
+    </div>
+
+    <hr class="rule my-7">
+
+    <p class="text-[.72rem] leading-relaxed measure" style="color:var(--fg-soft);">
+      Este kit es material educativo y de desarrollo personal. No constituye asesoría financiera, médica ni psicológica, y no sustituye el acompañamiento de un profesional. Los resultados dependen del trabajo individual de cada persona.
+    </p>
+    <p class="mt-4 text-[.72rem]" style="color:var(--fg-soft);">
+      © <span class="count" id="year">2026</span> La Mujer que Manifiesta. Todos los derechos reservados.
+    </p>
+  </div>
+</footer>
+
+<!-- ───────────────────────── CTA FIJO EN MÓVIL ───────────────────────── -->
+<div class="fixed left-0 right-0 bottom-0 z-50 sm:hidden"
+     style="background:rgba(253,251,247,.93); backdrop-filter:blur(10px); border-top:1px solid var(--hairline); padding:.7rem 16px; padding-bottom:calc(.7rem + env(safe-area-inset-bottom, 0px));">
+  <a href="#oferta"
+     class="btn-gold flex items-center justify-center gap-2 rounded-full font-sans font-bold uppercase tracking-[.08em] text-[.74rem]"
+     style="padding:.95rem 1rem;">
+    Quiero mi kit por $17
+    <span class="font-normal normal-case tracking-normal" style="opacity:.72;">(antes $55)</span>
+  </a>
+</div>
+
+<script>
+  // Cuenta atrás hasta la medianoche local: la oferta del día.
+  (function () {
+    var el = document.getElementById('countdown');
+    if (!el) return;
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function tick() {
+      var now = new Date();
+      var end = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0, 0);
+      var left = Math.max(0, end - now);
+      var h = Math.floor(left / 3600000);
+      var m = Math.floor((left % 3600000) / 60000);
+      var s = Math.floor((left % 60000) / 1000);
+      el.textContent = pad(h) + ' h  ' + pad(m) + ' m  ' + pad(s) + ' s';
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  })();
+
+  // Año en el aviso legal
+  (function () {
+    var y = document.getElementById('year');
+    if (y) y.textContent = new Date().getFullYear();
+  })();
+</script>
