@@ -8,64 +8,82 @@ Sitio de venta de los kits digitales. HTML estático, sin build de dependencias,
 
 ## ➕ Cómo añadir un producto
 
-Todo se controla desde **un solo archivo**: [`productos.config.js`](productos.config.js).
-
-Abre ese archivo, copia un bloque `{ ... }` entero, pégalo debajo y cambia los textos.
-Lo mínimo que necesita un producto son cuatro datos:
+Abre **[`MIS-PRODUCTOS.js`](MIS-PRODUCTOS.js)**, baja hasta donde pone `PRODUCTO 2`, quita las
+marcas de comentario (`/*` y `*/`) y cambia los textos. Son siete líneas:
 
 ```js
 {
-  slug:     "mi-producto-nuevo",     // la carpeta: lamujerquemanifiesta.com/mi-producto-nuevo/
-  nombre:   "Mi Producto Nuevo",
-  checkout: "https://go.hotmart.com/XXXXX?ap=XXXX",   // el enlace de pago
-  precio:   "$27"
+  slug:        "mi-producto-nuevo",    // la carpeta: .../mi-producto-nuevo/
+  nombre:      "Mi Producto Nuevo",
+  categoria:   "Kit digital",
+  subtitulo:   "Lo que sea",
+  checkout:    "https://go.hotmart.com/XXXXX?ap=XXXX",
+  precio:      "$27",
+  descripcion: "Una línea contando de qué va."
 }
 ```
 
-Luego, **una de estas dos cosas**:
+Con eso se genera sola una landing completa, con el estilo del sitio: portada, oferta con
+cuenta atrás, garantía, preguntas frecuentes y cierre. Y aparece en el catálogo.
 
-**Desde el navegador (lo más fácil).** Edita `productos.config.js` en GitHub, dale a *Commit*,
-y una acción automática genera las páginas y las publica. No hay que hacer nada más.
+Guarda y haz **una** de estas dos cosas:
 
-**Desde tu ordenador.** En la carpeta del proyecto:
+- **Desde GitHub en el navegador.** Edita el archivo ahí, dale a *Commit*, y una acción
+  automática genera y publica. No hace falta nada más.
+- **Desde tu ordenador.** `node build.js`, luego `git add -A && git commit -m "nuevo producto" && git push`.
 
-```bash
-node build.js
-```
+### Los textos largos son opcionales
 
-Y luego `git add -A && git commit -m "nuevo producto" && git push`.
+Cada producto puede llevar un bloque `textos: { ... }` con la copia larga (la sección de dolor,
+las piezas, los bonos, las preguntas propias…). **Si no lo pones, esas secciones no salen** y la
+landing se genera igual, más corta pero completa. Pide que te la escriban y se rellena después.
 
-En ambos casos se crea sola la landing completa del producto nuevo, idéntica en diseño a la
-actual pero con sus textos, y aparece en el catálogo.
+### Lo que se pone solo
 
-> Todas las secciones son opcionales. Si omites `dolor`, `bonos`, `faq`… esa sección
-> simplemente no sale. Puedes publicar con lo mínimo y rellenar después.
->
-> Si todavía no tienes el enlace de pago, pon `estado: "proximamente"`: sale en el catálogo
-> marcado como «Pronto», sin botón de compra.
+Sin que tengas que hacer nada, cada producto hereda de `AJUSTES`: la barra dorada de arriba,
+las horas de la cuenta atrás, los días de garantía, el correo de soporte y el aviso legal.
+Y se le generan tres preguntas frecuentes que valen para cualquier producto digital (cómo se
+recibe, si caduca el acceso, cómo se devuelve).
+
+### Si todavía no se vende
+
+Ponle `proximamente: true`. Sale en el catálogo marcado como **Pronto**, sin botón de compra.
 
 ---
 
-## Archivos
+## Para cambiar algo rápido
 
-| Archivo | Para qué sirve |
+Todo está en `MIS-PRODUCTOS.js`:
+
+| Qué quieres cambiar | Dónde |
 |---|---|
-| **`productos.config.js`** | **El único que editas.** Todos los productos y sus textos. |
-| `build.js` | Genera las páginas a partir del anterior. `node build.js`. |
-| `plantillas/` | Estilos compartidos: paleta, tipografías, componentes. |
-| `.github/workflows/construir.yml` | Regenera y publica solo al editar el config en GitHub. |
-| `og-image.jpg` | Imagen que se ve al compartir el enlace. 1200×630. |
+| El precio | `precio` y `precioAntes` del producto |
+| El enlace de pago | `checkout` del producto |
+| Las horas del contador | `horasContador`, en `AJUSTES` |
+| Los días de garantía | `diasGarantia`, en `AJUSTES` |
+| El correo de soporte | `correoSoporte`, en `AJUSTES` |
+| La barra dorada de arriba | `barraUrgencia`, en `AJUSTES` |
+| Cuál sale al entrar al sitio | `portada: true` (solo uno lo lleva) |
 
-### Generados automáticamente — no los edites a mano
+---
 
-Lo que escribas aquí se pierde en la siguiente generación.
+## Los archivos
 
-| Archivo | Qué es |
+| | |
 |---|---|
-| `index.html` | La portada: la landing del producto con `principal: true`. |
-| `<slug>/index.html` | Una landing completa por producto. |
+| **`MIS-PRODUCTOS.js`** | **El único que editas.** |
+| `build.js` | El generador. Contiene los estilos del sitio. No hace falta abrirlo. |
+| `og-image.jpg` | La imagen que se ve al compartir el enlace. |
+| `.github/workflows/` | La automatización que publica al editar desde GitHub. |
+
+**Generados: no los edites a mano**, se sobrescriben en cada generación.
+
+| | |
+|---|---|
+| `index.html` | La portada. |
+| `<nombre-del-producto>/` | Una carpeta por producto. Es lo que hace su dirección web. |
 | `productos.html` | El catálogo. |
-| `artifact.html` | Copia sin `<head>` para previsualizar en Claude. |
+| `artifact.html` | Copia para previsualizar en Claude. |
 
 ---
 

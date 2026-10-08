@@ -1,8 +1,8 @@
 /* ══════════════════════════════════════════════════════════════════════════
    GENERADOR DEL SITIO
 
-   Lee productos.config.js y escribe:
-     · index.html            la landing del producto marcado como principal
+   Lee MIS-PRODUCTOS.js y escribe:
+     · index.html            la landing del producto marcado como portada
      · <slug>/index.html     una landing completa por cada producto
      · productos.html        el catálogo con todos
      · artifact.html         la versión para previsualizar en Claude
@@ -16,13 +16,191 @@
 const fs   = require('fs');
 const path = require('path');
 
-const PRODUCTOS = require('./productos.config.js');
-const DOMINIO   = 'https://lamujerquemanifiesta.com';
-const SOPORTE   = 'Emprendersinlimitess@gmail.com';
-const MARCA     = 'La Mujer que Manifiesta';
+const { AJUSTES, PRODUCTOS } = require('./MIS-PRODUCTOS.js');
 
-const RESET   = fs.readFileSync('plantillas/reset.html',   'utf8').trim();
-const ESTILOS = fs.readFileSync('plantillas/estilos.html', 'utf8').trim();
+const DOMINIO = AJUSTES.dominio       || 'https://lamujerquemanifiesta.com';
+const SOPORTE = AJUSTES.correoSoporte || '';
+const MARCA   = AJUSTES.marca         || 'Mi marca';
+
+/* Los estilos del sitio viven aqui dentro para no tener carpetas sueltas. */
+const RESET = String.raw`<style>
+  /* Reset minimo equivalente al que inyecta el visor de Artifacts */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  :root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+  body { margin: 0; }
+  img, svg { max-width: 100%; }
+  [hidden] { display: none !important; }
+</style>`;
+
+const ESTILOS = String.raw`<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap">
+
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          crema:   '#FDFBF7',
+          lino:    '#FAF6EE',
+          arena:   '#E8DED1',
+          grafito: '#2A2421',
+          oro:     '#D4AF37',
+          oroviejo:'#C5A059'
+        },
+        fontFamily: {
+          display: ['"Playfair Display"', 'Georgia', 'Times New Roman', 'serif'],
+          sans:    ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif']
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  /* Minimal luxury: una columna editorial centrada, secciones alternadas crema/lino,
+     el oro reservado para CTAs y filetes finos. Un solo tema, por decision de marca. */
+  :root {
+    --bg:        #FDFBF7;
+    --bg-alt:    #FAF6EE;
+    --surface:   #E8DED1;
+    --fg:        #2A2421;
+    --fg-soft:   #6B6058;
+    --gold:      #D4AF37;
+    --gold-deep: #C5A059;
+    --hairline:  rgba(212,175,55,.32);
+    color-scheme: light;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: '"Plus Jakarta Sans"', 'Plus Jakarta Sans', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .display { text-wrap: balance; }
+  p { text-wrap: pretty; }
+
+  .wrap { width: 100%; max-width: 1120px; margin-inline: auto; padding-inline: 20px; }
+  .measure { max-width: 62ch; }
+
+  .eyebrow {
+    font-size: .6875rem; letter-spacing: .22em; text-transform: uppercase;
+    font-weight: 600; color: var(--gold-deep);
+  }
+
+  .hairline { border-color: var(--hairline); }
+
+  .rule {
+    height: 1px; border: 0;
+    background: linear-gradient(90deg, transparent, var(--hairline) 18%, var(--hairline) 82%, transparent);
+  }
+
+  /* Boton dorado con brillo que cruza al pasar el cursor */
+  .btn-gold {
+    position: relative; overflow: hidden; isolation: isolate;
+    background: linear-gradient(135deg, #E0C25B 0%, var(--gold) 46%, var(--gold-deep) 100%);
+    color: #231E1A;
+    box-shadow: 0 1px 0 rgba(255,255,255,.5) inset, 0 12px 28px -12px rgba(170,133,30,.65);
+    transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+  }
+  .btn-gold:hover {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-deep) 55%, #B8954F 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 1px 0 rgba(255,255,255,.4) inset, 0 18px 34px -14px rgba(170,133,30,.75);
+  }
+  .btn-gold:active { transform: translateY(0); }
+  .btn-gold::after {
+    content: ''; position: absolute; inset: 0 auto 0 -60%; width: 45%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,.55), transparent);
+    transform: skewX(-18deg); z-index: -1;
+  }
+  .btn-gold:hover::after { animation: sheen .9s ease forwards; }
+  @keyframes sheen { to { left: 115%; } }
+
+  .btn-gold:focus-visible,
+  a:focus-visible, summary:focus-visible, button:focus-visible {
+    outline: 2px solid var(--gold-deep); outline-offset: 3px; border-radius: 2px;
+  }
+
+  /* Mockup del kit: tres piezas apiladas en perspectiva */
+  .kit-stage { perspective: 1400px; }
+  .kit {
+    transform-style: preserve-3d;
+    transform: rotateY(-16deg) rotateX(6deg);
+    transition: transform .7s cubic-bezier(.2,.7,.3,1);
+  }
+  .kit-stage:hover .kit { transform: rotateY(-9deg) rotateX(3deg) translateY(-6px); }
+
+  .book {
+    background:
+      linear-gradient(118deg, rgba(255,255,255,.55) 0%, transparent 34%),
+      linear-gradient(160deg, #F3EADC 0%, #E8DED1 52%, #D8CBB8 100%);
+    box-shadow:
+      0 1px 0 rgba(255,255,255,.75) inset,
+      -1px 0 0 rgba(255,255,255,.6) inset,
+      38px 44px 70px -30px rgba(42,36,33,.42),
+      0 2px 8px rgba(42,36,33,.10);
+  }
+  .book::before { /* lomo */
+    content: ''; position: absolute; inset: 0 auto 0 0; width: 13px;
+    background: linear-gradient(90deg, #C9B99F, #E3D8C6 45%, rgba(227,216,198,0) 100%);
+    border-right: 1px solid rgba(255,255,255,.45);
+  }
+  .book::after { /* brillo dorado que se desplaza */
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(112deg, transparent 36%, rgba(212,175,55,.40) 50%, transparent 64%);
+    background-size: 280% 100%;
+    animation: glint 7s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes glint {
+    0%, 100% { background-position: 118% 0; }
+    50%      { background-position: -18% 0; }
+  }
+
+  .plate { /* trackers y audios detras del libro */
+    background: linear-gradient(155deg, #FFFDF9 0%, #F4ECDF 100%);
+    box-shadow: 18px 22px 40px -22px rgba(42,36,33,.34), 0 1px 0 rgba(255,255,255,.8) inset;
+  }
+
+  .card {
+    background: linear-gradient(165deg, #EFE7DA 0%, var(--surface) 100%);
+    border: 1px solid var(--hairline);
+    box-shadow: 0 1px 0 rgba(255,255,255,.65) inset, 0 16px 34px -26px rgba(42,36,33,.35);
+  }
+
+  .quiet-card {
+    background: #FFFDF9;
+    border: 1px solid rgba(42,36,33,.08);
+  }
+
+  .num {
+    font-family: '"Playfair Display"', 'Playfair Display', Georgia, serif;
+    font-size: 2.25rem; line-height: 1; color: var(--gold-deep);
+    font-variant-numeric: tabular-nums;
+  }
+
+  details > summary { cursor: pointer; list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] .chev { transform: rotate(45deg); }
+  .chev { transition: transform .25s ease; }
+
+  .count { font-variant-numeric: tabular-nums; }
+
+  /* Entrada suave desde un estado ya visible */
+  .rise { animation: rise .7s cubic-bezier(.2,.7,.3,1) both; }
+  @keyframes rise { from { opacity: .55; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .kit { transform: none; }
+  }
+</style>`;
 
 /* ── utilidades ───────────────────────────────────────────────────────── */
 
@@ -43,6 +221,122 @@ const parrafo = p => t(p).startsWith('@')
 
 const dosDigitos = n => String(n).padStart(2, '0');
 
+/* ── valores por defecto ──────────────────────────────────────────────────
+   Un producto solo necesita slug, nombre, categoría, subtítulo, checkout,
+   precio y descripción. Todo lo demás se deduce aquí, con el estilo del
+   sitio, para que una landing mínima salga completa igualmente.          */
+
+function conEyebrow(obj, eyebrow) {
+  return obj ? Object.assign({ eyebrow }, obj) : null;
+}
+
+function faqDeSiempre(dias) {
+  return {
+    entrega: {
+      p: '¿Cómo y cuándo lo recibo?',
+      r: 'Al confirmarse el pago te llega un correo con el enlace de descarga, normalmente en menos de cinco minutos. Son archivos digitales: no esperas envío ni pagas por entrega.'
+    },
+    acceso: {
+      p: '¿El acceso caduca?',
+      r: 'No. Descargas los archivos y son tuyos para siempre.'
+    },
+    devolucion: {
+      p: '¿Y si no me gusta?',
+      r: 'Tienes ' + dias + ' días para pedir la devolución completa escribiendo al correo de soporte. Te regresamos el pago sin pedirte explicaciones.'
+    }
+  };
+}
+
+function normalizar(p) {
+  const x      = p.textos || {};
+  const nombre = t(p.nombre);
+  const precio = t(p.precio);
+  const dias   = p.diasGarantia !== undefined ? p.diasGarantia : AJUSTES.diasGarantia;
+  const base   = faqDeSiempre(dias);
+
+  const notaCorta = ['Acceso inmediato', 'Pago único']
+    .concat(dias ? ['Garantía de ' + dias + ' días'] : []).join(' \u00b7 ');
+
+  return {
+    slug:       p.slug,
+    estado:     p.proximamente ? 'proximamente' : 'disponible',
+    nombre:     nombre,
+    categoria:  p.categoria,
+    subtitulo:  p.subtitulo,
+    checkout:   p.checkout,
+    botonCorto: p.botonCorto || 'Comprar',
+    precio:     precio,
+    precioAntes: p.precioAntes,
+    moneda:     p.moneda !== undefined ? p.moneda : 'USD',
+    descuento:  p.descuento,
+
+    urgencia:    p.barraUrgencia  !== undefined ? p.barraUrgencia  : AJUSTES.barraUrgencia,
+    horasOferta: p.horasContador  !== undefined ? p.horasContador  : AJUSTES.horasContador,
+    garantiaDias: dias,
+
+    seo: {
+      titulo:      p.tituloSeo || (nombre + (hay(p.subtitulo) ? ' \u2014 ' + t(p.subtitulo) : '')),
+      descripcion: t(p.descripcion)
+    },
+
+    hero: {
+      titular:    x.titular    || nombre,
+      subtitular: x.subtitular || t(p.descripcion),
+      cta:        x.cta        || (hay(precio) ? 'Lo quiero por ' + precio : 'Lo quiero'),
+      notaCta:    notaCorta,
+      insignias:  x.insignias
+    },
+
+    portada: x.portada || {
+      arriba: p.categoria,
+      titulo: nombre,
+      bajo:   p.subtitulo,
+      pie:    ''
+    },
+
+    dolor:          conEyebrow(x.dolor,          'Antes de seguir'),
+    porque:         conEyebrow(x.porque,         'El problema real'),
+    incluye:        conEyebrow(x.incluye,        'Qué incluye'),
+    camino:         conEyebrow(x.camino,         'El camino'),
+    bonos:          conEyebrow(x.bonos,          'Incluidos hoy'),
+    primeraEdicion: conEyebrow(x.primeraEdicion, 'Primera edición'),
+    testimonios:    x.testimonios || [],
+    paraQuien:      x.paraQuien,
+
+    oferta: Object.assign({
+      eyebrow: 'Oferta de lanzamiento',
+      titulo:  'Llévate ' + nombre + ' hoy',
+      cta:     hay(precio) ? 'Sí, lo quiero por ' + precio : 'Lo quiero',
+      notaCta: 'Acceso inmediato por correo \u00b7 Pago seguro'
+               + (dias ? '<br>Garantía de devolución de ' + dias + ' días' : '')
+    }, x.oferta || {}),
+
+    garantia: dias ? Object.assign({
+      titulo: 'Pruébalo sin riesgo',
+      texto:  'Si lo abres y sientes que esto no es para ti, escríbenos dentro de los primeros '
+              + dias + ' días y te devolvemos el dinero completo. Sin cuestionarios, sin incomodidad.'
+    }, x.garantia || {}) : null,
+
+    // Las tres de siempre valen para cualquier producto digital; las propias
+    // del producto se insertan en medio.
+    faq: [x.faqEntrega || base.entrega]
+           .concat(x.faq || [])
+           .concat([x.faqAcceso || base.acceso, x.faqDevolucion || base.devolucion]),
+
+    cierre: Object.assign({
+      eyebrow: 'Último paso',
+      titulo:  'Empieza hoy con ' + nombre,
+      cta:     hay(precio) ? 'Empezar hoy por ' + precio : 'Empezar hoy',
+      nota:    notaCorta
+    }, x.cierre || {}),
+
+    catalogo: {
+      descripcion: p.descripcion,
+      boton:       p.boton || (hay(precio) ? 'Comprar por ' + precio : 'Ver más')
+    }
+  };
+}
+
 /* ── bloques de la página ─────────────────────────────────────────────── */
 
 function barraUrgencia(p) {
@@ -61,7 +355,7 @@ function cabecera(p, base) {
     ? `
       <a href="${attr(p.checkout)}" target="_blank" rel="noopener"
          class="btn-gold hidden sm:inline-flex items-center rounded-full font-bold uppercase tracking-[.1em] text-[.68rem] whitespace-nowrap"
-         style="padding:.62rem 1.3rem; text-decoration:none;">Quiero mi kit</a>`
+         style="padding:.62rem 1.3rem; text-decoration:none;">${t(p.botonCorto)}</a>`
     : '';
 
   return `
@@ -813,11 +1107,11 @@ function comprobar(lista) {
       problemas.push(`${d}: el slug "${p.slug}" solo admite minúsculas, números y guiones.`);
     if (vistos.has(p.slug)) problemas.push(`${d}: el slug "${p.slug}" está repetido.`);
     vistos.add(p.slug);
-    if (p.estado !== 'proximamente' && !hay(p.checkout))
-      problemas.push(`${d}: está como disponible pero no tiene "checkout". Ponle el enlace de pago o márcalo estado: "proximamente".`);
+    if (!p.proximamente && !hay(p.checkout))
+      problemas.push(`${d}: no tiene "checkout". Ponle el enlace de pago, o añádele  proximamente: true  si todavía no se vende.`);
   });
-  const principales = lista.filter(p => p.principal);
-  if (principales.length > 1) problemas.push('Hay más de un producto con principal: true. Solo puede haber uno.');
+  if (lista.filter(p => p.portada).length > 1)
+    problemas.push('Hay más de un producto con  portada: true . Solo puede haber uno.');
   return problemas;
 }
 
@@ -825,11 +1119,13 @@ const problemas = comprobar(PRODUCTOS);
 if (problemas.length) {
   console.error('\n  No se pudo generar el sitio:\n');
   problemas.forEach(x => console.error('    · ' + x));
-  console.error('\n  Corrige productos.config.js y vuelve a ejecutar node build.js\n');
+  console.error('\n  Corrige MIS-PRODUCTOS.js y vuelve a ejecutar node build.js\n');
   process.exit(1);
 }
 
-const principal = PRODUCTOS.find(p => p.principal) || PRODUCTOS[0];
+const LISTA     = PRODUCTOS.map(normalizar);
+const iPortada  = Math.max(0, PRODUCTOS.findIndex(p => p.portada));
+const principal = LISTA[iPortada];
 const escritos = [];
 
 function escribir(destino, contenido) {
@@ -844,14 +1140,14 @@ escribir('index.html', paginaCompleta(principal, { base: '', url: DOMINIO + '/' 
 escribir('artifact.html', paginaArtifact(principal));
 
 // Una landing por producto
-PRODUCTOS.forEach(p => {
+LISTA.forEach(p => {
   escribir(path.join(p.slug, 'index.html'),
            paginaCompleta(p, { base: '../', url: `${DOMINIO}/${p.slug}/` }));
 });
 
 // Catálogo
-escribir('productos.html', catalogo(PRODUCTOS));
+escribir('productos.html', catalogo(LISTA));
 
-console.log('\n  Sitio generado desde productos.config.js\n');
+console.log('\n  Sitio generado desde MIS-PRODUCTOS.js\n');
 escritos.forEach(x => console.log('    ' + x));
-console.log(`\n  ${PRODUCTOS.length} producto(s). Portada: «${principal.nombre}».\n`);
+console.log(`\n  ${LISTA.length} producto(s). Portada: «${principal.nombre}».\n`);

@@ -1,4 +1,4 @@
-# Regenera el sitio solo, en cuanto cambias productos.config.js desde GitHub.
+# Regenera el sitio solo, en cuanto cambias MIS-PRODUCTOS.js desde GitHub.
 # Así puedes añadir un producto desde el navegador, sin abrir la terminal.
 
 name: Generar el sitio
@@ -7,9 +7,8 @@ on:
   push:
     branches: [main]
     paths:
-      - 'productos.config.js'
+      - 'MIS-PRODUCTOS.js'
       - 'build.js'
-      - 'plantillas/**'
   workflow_dispatch:        # también se puede lanzar a mano desde la pestaña Actions
 
 permissions:
@@ -34,7 +33,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if [ -n "$(git status --porcelain)" ]; then
             git add -A
-            git commit -m "Regenera el sitio desde productos.config.js"
+            git commit -m "Regenera el sitio desde MIS-PRODUCTOS.js"
             git push
             echo "Sitio actualizado."
           else
