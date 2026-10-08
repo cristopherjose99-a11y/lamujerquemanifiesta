@@ -784,20 +784,62 @@
 </div>
 
 <script>
-  // Cuenta atrás hasta la medianoche local: la oferta del día.
+  /* Cuenta atrás por visitante.
+
+     El plazo se guarda en el navegador de cada persona, así que:
+       · quien vuelve, retoma el tiempo donde lo dejó (no se reinicia)
+       · quien llega por primera vez, empieza con el plazo completo
+       · al llegar a cero arranca otro plazo, nunca se queda en 00:00:00
+
+     Para cambiar la duración, toca solo HORAS_DE_OFERTA. */
   (function () {
+    var HORAS_DE_OFERTA = 24;
+    var CLAVE = 'lmqm_fin_oferta';
+
     var el = document.getElementById('countdown');
     if (!el) return;
 
+    var duracion = HORAS_DE_OFERTA * 3600000;
+    var finEnMemoria = 0;   // respaldo si el navegador bloquea el almacenamiento
+
+    function leerFin() {
+      try {
+        var v = parseInt(window.localStorage.getItem(CLAVE), 10);
+        return isFinite(v) ? v : 0;
+      } catch (e) {
+        return finEnMemoria;
+      }
+    }
+
+    function guardarFin(fin) {
+      finEnMemoria = fin;
+      try { window.localStorage.setItem(CLAVE, String(fin)); } catch (e) {}
+    }
+
+    function finVigente() {
+      var ahora = Date.now();
+      var fin = leerFin();
+      // Sin plazo guardado, ya vencido, o corrupto: arranca uno nuevo
+      if (!fin || fin <= ahora || fin - ahora > duracion) {
+        fin = ahora + duracion;
+        guardarFin(fin);
+      }
+      return fin;
+    }
+
     function pad(n) { return String(n).padStart(2, '0'); }
 
+    var fin = finVigente();
+
     function tick() {
-      var now = new Date();
-      var end = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0, 0);
-      var left = Math.max(0, end - now);
-      var h = Math.floor(left / 3600000);
-      var m = Math.floor((left % 3600000) / 60000);
-      var s = Math.floor((left % 60000) / 1000);
+      var restante = fin - Date.now();
+      if (restante <= 0) {
+        fin = finVigente();
+        restante = fin - Date.now();
+      }
+      var h = Math.floor(restante / 3600000);
+      var m = Math.floor((restante % 3600000) / 60000);
+      var s = Math.floor((restante % 60000) / 1000);
       el.textContent = pad(h) + ' h  ' + pad(m) + ' m  ' + pad(s) + ' s';
     }
 

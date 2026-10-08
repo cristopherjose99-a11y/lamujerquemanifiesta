@@ -48,7 +48,27 @@ Ojo: `https://go.hotmart.com/P107334202L` **sin** el `?ap=c4cb` no lleva al pago
 página de ventas configurada en el producto.
 
 - [ ] **Sustituir los testimonios.** Los tres bloques de la sección «Lo que dicen» están marcados como `Ejemplo`. Cámbialos por testimonios reales con nombre y foto.
-- [ ] **Analítica.** No hay ningún píxel instalado (Meta, GA4, TikTok).
+- [ ] **Píxeles de anuncios — PENDIENTE, el usuario pasará los IDs.**
+  - **Meta Pixel** (Facebook + Instagram). ID numérico, se saca de Meta Business Suite → Administrador de eventos.
+  - **Google Analytics 4**. ID de medición, empieza por `G-`, en Analytics → Administrar → Flujos de datos.
+  - Instalar en `index.html`, `artifact.html` y `productos.html`.
+  - **Importante:** el pago ocurre en Hotmart, así que el píxel de la web solo ve visitas y clics. Hay que
+    conectar el mismo píxel dentro de Hotmart (Herramientas → Píxeles) para que las compras se atribuyan.
+
+## La cuenta atrás
+
+El contador de la sección de oferta es **por visitante**, no global. El plazo se guarda en
+`localStorage` del navegador de cada persona:
+
+- Quien vuelve, retoma el tiempo donde lo dejó. No se reinicia.
+- Quien llega por primera vez, empieza con el plazo completo.
+- Al llegar a cero arranca otro plazo, nunca se queda en `00 h 00 m 00 s`.
+
+Para cambiar la duración, edita `HORAS_DE_OFERTA` en el `<script>` del final de `index.html`
+(y replica el cambio en `artifact.html`). Está en 24 horas.
+
+Funciona también en incógnito: si el navegador bloquea el almacenamiento, el plazo se mantiene
+en memoria durante la visita.
 
 ## Desarrollo local
 
