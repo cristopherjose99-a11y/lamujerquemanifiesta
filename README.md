@@ -55,6 +55,14 @@ página de ventas configurada en el producto.
   - **Importante:** el pago ocurre en Hotmart, así que el píxel de la web solo ve visitas y clics. Hay que
     conectar el mismo píxel dentro de Hotmart (Herramientas → Píxeles) para que las compras se atribuyan.
 
+## Navegación
+
+La landing lleva una cabecera fija (`<nav class="sticky">`, justo antes del hero) con la marca,
+**Qué incluye**, **Productos** y un botón de compra. En móvil se ocultan «Qué incluye» y el botón
+para no apretar la barra; abajo ya hay un CTA fijo.
+
+El enlace a `productos.html` está en la cabecera y también en el pie.
+
 ## La cuenta atrás
 
 El contador de la sección de oferta es **por visitante**, no global. El plazo se guarda en
