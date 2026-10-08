@@ -3,7 +3,7 @@
 Landing page de ventas del kit digital **La Mujer que Manifiesta** — método de 21 días para
 reprogramar creencias de escasez. Libro digital, trackers imprimibles y audios guiados.
 
-🔗 **Web:** https://cristopherjose99-a11y.github.io/Mujer-que-manifiesta/
+🔗 **Web:** https://cristopherjose99-a11y.github.io/lamujerquemanifiesta/
 
 ## Archivos
 
