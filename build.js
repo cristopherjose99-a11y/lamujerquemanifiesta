@@ -332,7 +332,8 @@ function normalizar(p) {
 
     catalogo: {
       descripcion: p.descripcion,
-      boton:       p.boton || (hay(precio) ? 'Comprar por ' + precio : 'Ver más')
+      // La ficha lleva a la página del producto, no al pago: el botón lo dice.
+      boton:       p.boton || 'Ver el producto'
     }
   };
 }

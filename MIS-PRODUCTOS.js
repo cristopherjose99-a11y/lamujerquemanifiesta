@@ -90,6 +90,7 @@ const PRODUCTOS = [
   descuento:   "69%",                                  // sale junto al precio
   tituloSeo:   "La Mujer que Manifiesta — Kit digital de 21 días",
   botonCorto:  "Quiero mi kit",                        // el botón pequeño de arriba
+  boton:       "Ver el kit",                           // el botón de su ficha en el catálogo
 
   /* ─────────────────────────────────────────────────────────────────────
      DE AQUÍ PARA ABAJO SON LOS TEXTOS LARGOS DE LA PÁGINA.
