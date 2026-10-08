@@ -1,62 +1,42 @@
 # Conectar lamujerquemanifiesta.com
 
-Estado al 8 de octubre de 2026: el dominio `.com` estaba **libre**. El `.net` también.
-Los `.online` y `.shop` ya están ocupados.
+Estado: dominio **comprado en Porkbun** el 8 de octubre de 2026. Falta configurar el DNS.
 
 La web funciona mientras tanto en
 https://cristopherjose99-a11y.github.io/lamujerquemanifiesta/
 
 ---
 
-## Paso 1 — Comprar el dominio (lo haces tú)
+## Paso 1 — Comprar el dominio ✅ HECHO
 
-Unos 10-15 USD al año. Cualquiera de estos sirve:
+`lamujerquemanifiesta.com` comprado en **Porkbun** el 8 de octubre de 2026.
+Caduca el 8 de octubre de 2027 — activa la renovación automática para no perderlo.
 
-| Registrador | Nota |
-|---|---|
-| [Namecheap](https://www.namecheap.com) | Privacidad WHOIS gratis de por vida |
-| [Cloudflare Registrar](https://www.cloudflare.com/products/registrar/) | Lo vende a precio de coste, sin recargo de renovación |
-| [Porkbun](https://porkbun.com) | Barato y privacidad incluida |
-| GoDaddy / Hostinger | Más caros al renovar; revisa el precio del año 2 |
+Nameservers asignados: `curitiba` / `fortaleza` / `maceio` / `salvador` `.ns.porkbun.com`.
 
-Compra **lamujerquemanifiesta.com**. No contrates hosting ni correo: no hacen falta,
-GitHub sirve la web gratis.
+## Paso 2 — Crear los registros DNS en Porkbun
 
-> ⚠️ Mira siempre el precio de **renovación**, no el del primer año. Varios
-> registradores venden a 1 USD el primer año y cobran 20 el segundo.
+Porkbun → **Domain Management** → fila de `lamujerquemanifiesta.com` → botón **DNS**.
 
-## Paso 2 — Crear los registros DNS (los pones tú en el panel del registrador)
+El formulario tiene cuatro campos: **Type**, **Host**, **Answer**, **TTL**.
+Para el dominio raíz, **Host se deja vacío** (no escribas `@` ni el dominio).
+TTL: `600`.
 
-En la zona DNS del dominio, borra los registros que traiga por defecto (suele venir
-un "parking") y crea estos nueve:
+| Type | Host | Answer |
+|---|---|---|
+| A | *(vacío)* | `185.199.108.153` |
+| A | *(vacío)* | `185.199.109.153` |
+| A | *(vacío)* | `185.199.110.153` |
+| A | *(vacío)* | `185.199.111.153` |
+| AAAA | *(vacío)* | `2606:50c0:8000::153` |
+| AAAA | *(vacío)* | `2606:50c0:8001::153` |
+| AAAA | *(vacío)* | `2606:50c0:8002::153` |
+| AAAA | *(vacío)* | `2606:50c0:8003::153` |
+| CNAME | `www` | `cristopherjose99-a11y.github.io` |
 
-**Cuatro registros A, en el dominio raíz** (el campo nombre/host va vacío o con `@`):
+El CNAME apunta solo al dominio de GitHub, **sin** `/lamujerquemanifiesta` al final.
 
-```
-185.199.108.153
-185.199.109.153
-185.199.110.153
-185.199.111.153
-```
-
-**Cuatro registros AAAA, también en la raíz** (IPv6, opcional pero recomendado):
-
-```
-2606:50c0:8000::153
-2606:50c0:8001::153
-2606:50c0:8002::153
-2606:50c0:8003::153
-```
-
-**Un registro CNAME para el www:**
-
-```
-nombre/host:  www
-valor:        cristopherjose99-a11y.github.io
-```
-
-Ojo: el CNAME apunta a `cristopherjose99-a11y.github.io` **sin** el nombre del
-repositorio al final.
+Si al comprar quedó algún registro de parking, bórralo antes.
 
 ## Paso 3 — Avisarme
 
