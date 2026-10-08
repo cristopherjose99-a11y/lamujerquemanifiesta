@@ -5,6 +5,9 @@ reprogramar creencias de escasez. Libro digital, trackers imprimibles y audios g
 
 🔗 **Web:** https://cristopherjose99-a11y.github.io/lamujerquemanifiesta/
 
+> Dominio propio pendiente: `lamujerquemanifiesta.com` estaba libre el 8 de octubre de 2026.
+> Los pasos para conectarlo están en [DOMINIO.md](DOMINIO.md).
+
 ## Archivos
 
 | Archivo | Para qué sirve |
