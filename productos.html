@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+
+<title>Productos — La Mujer que Manifiesta</title>
+<meta name="description" content="Todos los kits y recursos digitales para reprogramar tu relación con el dinero, tus proyectos y tu poder interior.">
+<link rel="canonical" href="https://lamujerquemanifiesta.com/productos.html">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="La Mujer que Manifiesta">
+<meta property="og:url" content="https://lamujerquemanifiesta.com/productos.html">
+<meta property="og:title" content="Productos — La Mujer que Manifiesta">
+<meta property="og:description" content="Todos los kits y recursos digitales para reprogramar tu relación con el dinero, tus proyectos y tu poder interior.">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23FDFBF7'/%3E%3Cpath d='M16 6l7 10-7 10-7-10z' fill='%23D4AF37'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap">
+
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>
+  tailwind.config = {
+    theme: { extend: {
+      colors: { crema:'#FDFBF7', lino:'#FAF6EE', arena:'#E8DED1', grafito:'#2A2421', oro:'#D4AF37', oroviejo:'#C5A059' },
+      fontFamily: {
+        display: ['"Playfair Display"','Georgia','serif'],
+        sans:    ['"Plus Jakarta Sans"','system-ui','sans-serif']
+      }
+    }}
+  }
+</script>
+
+<style>
+  /* Mismos tokens que la landing: catalogo en rejilla, tarjetas de arena sobre crema. */
+  :root {
+    --bg:#FDFBF7; --bg-alt:#FAF6EE; --surface:#E8DED1;
+    --fg:#2A2421; --fg-soft:#6B6058;
+    --gold:#D4AF37; --gold-deep:#C5A059;
+    --hairline:rgba(212,175,55,.32);
+    color-scheme: light;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  :root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+  img, svg { max-width: 100%; }
+  [hidden] { display: none !important; }
+
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font-family: '"Plus Jakarta Sans"','Plus Jakarta Sans',system-ui,sans-serif;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+
+  .wrap { width:100%; max-width:1120px; margin-inline:auto; padding-inline:20px; }
+  .measure { max-width:62ch; }
+
+  .eyebrow {
+    font-size:.6875rem; letter-spacing:.22em; text-transform:uppercase;
+    font-weight:600; color:var(--gold-deep);
+  }
+
+  .rule {
+    height:1px; border:0;
+    background:linear-gradient(90deg, transparent, var(--hairline) 18%, var(--hairline) 82%, transparent);
+  }
+
+  .btn-gold {
+    position:relative; overflow:hidden; isolation:isolate;
+    background:linear-gradient(135deg,#E0C25B 0%,var(--gold) 46%,var(--gold-deep) 100%);
+    color:#231E1A;
+    box-shadow:0 1px 0 rgba(255,255,255,.5) inset, 0 12px 28px -12px rgba(170,133,30,.65);
+    transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+  }
+  .btn-gold:hover {
+    background:linear-gradient(135deg,var(--gold) 0%,var(--gold-deep) 55%,#B8954F 100%);
+    transform:translateY(-2px);
+  }
+  a:focus-visible, button:focus-visible {
+    outline:2px solid var(--gold-deep); outline-offset:3px; border-radius:2px;
+  }
+
+  .card {
+    background:linear-gradient(165deg,#EFE7DA 0%,var(--surface) 100%);
+    border:1px solid var(--hairline);
+    box-shadow:0 1px 0 rgba(255,255,255,.65) inset, 0 16px 34px -26px rgba(42,36,33,.35);
+    transition:transform .3s cubic-bezier(.2,.7,.3,1), box-shadow .3s ease;
+  }
+  .card.is-live:hover {
+    transform:translateY(-4px);
+    box-shadow:0 1px 0 rgba(255,255,255,.65) inset, 0 24px 44px -26px rgba(42,36,33,.42);
+  }
+
+  /* Portada del producto: mismo lenguaje que el mockup de la landing */
+  .cover {
+    position:relative; aspect-ratio:4/3; border-radius:10px; overflow:hidden;
+    background:
+      linear-gradient(118deg, rgba(255,255,255,.5) 0%, transparent 36%),
+      linear-gradient(160deg,#F3EADC 0%,#E8DED1 54%,#D8CBB8 100%);
+    border:1px solid var(--hairline);
+    display:grid; place-items:center; text-align:center; padding:1.25rem;
+  }
+  .cover::after {
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(112deg, transparent 38%, rgba(212,175,55,.32) 50%, transparent 62%);
+    background-size:280% 100%;
+    animation:glint 7s ease-in-out infinite;
+    pointer-events:none;
+  }
+  @keyframes glint { 0%,100%{background-position:118% 0} 50%{background-position:-18% 0} }
+
+  .badge {
+    display:inline-flex; align-items:center; gap:.4rem;
+    font-size:.6rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
+    border-radius:999px; padding:.3rem .7rem;
+  }
+  .badge-live  { background:var(--gold); color:#231E1A; }
+  .badge-soon  { background:rgba(42,36,33,.07); color:var(--fg-soft); }
+
+  .soon { opacity:.72; }
+  .soon .cover { filter:grayscale(.35); }
+
+  .count { font-variant-numeric: tabular-nums; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation:none !important; transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ENCABEZADO -->
+<header style="border-bottom:1px solid var(--hairline);">
+  <div class="wrap flex items-center justify-between gap-4" style="padding-block:1.1rem;">
+    <a href="./" class="font-display leading-tight" style="font-size:1.05rem; text-decoration:none; color:var(--fg);">
+      La Mujer que Manifiesta
+    </a>
+    <a href="./" class="text-[.72rem] uppercase tracking-[.16em]" style="color:var(--gold-deep); text-decoration:none;">
+      ← Volver al kit
+    </a>
+  </div>
+</header>
+
+<!-- INTRO -->
+<section>
+  <div class="wrap" style="padding-block:clamp(2.75rem,7vw,4.5rem);">
+    <p class="eyebrow">Catálogo</p>
+    <h1 class="mt-4 font-display font-medium leading-[1.1] tracking-[-.015em]"
+        style="font-size:clamp(2rem,5vw,3.1rem);">
+      Todo lo que tenemos para ti
+    </h1>
+    <p class="mt-5 measure leading-relaxed" style="color:var(--fg-soft);">
+      Recursos digitales para reprogramar tu relación con el dinero, sostener tus proyectos
+      y recuperar tu poder interior. Todos de acceso inmediato, pago único y con garantía
+      de siete días.
+    </p>
+  </div>
+</section>
+
+<!-- REJILLA DE PRODUCTOS -->
+<section class="bg-lino">
+  <div class="wrap" style="padding-block:clamp(3rem,7vw,4.5rem);">
+    <div id="rejilla" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
+
+    <p id="vacio" hidden class="text-center leading-relaxed" style="color:var(--fg-soft);">
+      Todavía no hay productos publicados.
+    </p>
+  </div>
+</section>
+
+<!-- PIE -->
+<footer style="border-top:1px solid var(--hairline);">
+  <div class="wrap" style="padding-block:2.5rem;">
+    <div class="flex flex-col sm:flex-row gap-6 sm:items-end sm:justify-between">
+      <div>
+        <p class="font-display text-lg leading-tight">La Mujer que Manifiesta</p>
+        <p class="mt-1 text-[.74rem] uppercase tracking-[.16em]" style="color:var(--fg-soft);">Recursos digitales</p>
+      </div>
+      <p class="text-[.74rem]" style="color:var(--fg-soft);">
+        Soporte: <span class="select-all font-medium" style="color:var(--fg);">Emprendersinlimitess@gmail.com</span>
+      </p>
+    </div>
+
+    <hr class="rule my-6">
+
+    <p class="text-[.72rem] leading-relaxed measure" style="color:var(--fg-soft);">
+      Nuestros productos son material educativo y de desarrollo personal. No constituyen asesoría
+      financiera, médica ni psicológica, y no sustituyen el acompañamiento de un profesional.
+    </p>
+    <p class="mt-3 text-[.72rem]" style="color:var(--fg-soft);">
+      © <span class="count" id="year">2026</span> La Mujer que Manifiesta.
+    </p>
+  </div>
+</footer>
+
+<script>
+/* ──────────────────────────────────────────────────────────────────────
+   AQUÍ SE AÑADEN LOS PRODUCTOS
+
+   Copia un bloque { ... } entero, pégalo debajo y cambia los textos.
+   El orden de la lista es el orden en que aparecen en la página.
+
+   estado:  "disponible"  → tarjeta a color, con precio y botón
+            "proximamente" → tarjeta atenuada, sin botón
+   enlace:  a dónde lleva el botón ("/" es la landing del kit)
+   ────────────────────────────────────────────────────────────────────── */
+
+var PRODUCTOS = [
+
+  {
+    estado:      "disponible",
+    categoria:   "Kit digital",
+    titulo:      "La Mujer que Manifiesta",
+    portada:     "Método de 21 días",
+    descripcion: "Libro digital, trackers imprimibles y audios de reprogramación para romper el ciclo de escasez en tres semanas.",
+    precio:      "$17",
+    precioAntes: "$55",
+    enlace:      "./",
+    boton:       "Ver el kit"
+  },
+
+  {
+    estado:      "proximamente",
+    categoria:   "Próximo lanzamiento",
+    titulo:      "Tu segundo producto",
+    portada:     "Próximamente",
+    descripcion: "Sustituye este bloque por tu siguiente producto. Mientras el estado sea «proximamente», la tarjeta sale atenuada y sin botón de compra.",
+    precio:      "",
+    precioAntes: "",
+    enlace:      "",
+    boton:       ""
+  }
+
+];
+
+/* ────────────────────────────────────────────────────────────────────── */
+
+(function () {
+  var rejilla = document.getElementById('rejilla');
+  var vacio   = document.getElementById('vacio');
+
+  if (!PRODUCTOS.length) {
+    vacio.hidden = false;
+    return;
+  }
+
+  function esc(t) {
+    return String(t == null ? '' : t)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  rejilla.innerHTML = PRODUCTOS.map(function (p) {
+    var vivo = p.estado === 'disponible';
+
+    var precio = '';
+    if (vivo && p.precio) {
+      precio =
+        '<p class="mt-5 flex items-baseline gap-2">' +
+          '<span class="font-display count" style="font-size:1.75rem; color:var(--fg);">' + esc(p.precio) + '</span>' +
+          (p.precioAntes
+            ? '<s class="count text-[.85rem]" style="color:var(--fg-soft); text-decoration-thickness:1px;">' + esc(p.precioAntes) + '</s>'
+            : '') +
+        '</p>';
+    }
+
+    var boton = '';
+    if (vivo && p.enlace) {
+      boton =
+        '<a href="' + esc(p.enlace) + '" ' +
+        'class="btn-gold mt-5 flex items-center justify-center rounded-full font-bold uppercase tracking-[.1em] text-[.74rem]" ' +
+        'style="padding:.95rem 1rem; text-decoration:none;">' + esc(p.boton || 'Ver más') + '</a>';
+    }
+
+    return '' +
+      '<article class="card rounded-2xl flex flex-col ' + (vivo ? 'is-live' : 'soon') + '" style="padding:1.25rem; min-width:0;">' +
+        '<div class="cover">' +
+          '<div>' +
+            '<p class="eyebrow" style="font-size:.5rem; letter-spacing:.24em;">' + esc(p.categoria) + '</p>' +
+            '<p class="mt-3 font-display leading-tight" style="font-size:1.15rem;">' + esc(p.portada) + '</p>' +
+          '</div>' +
+        '</div>' +
+        '<div class="mt-5 flex items-start justify-between gap-3">' +
+          '<h2 class="font-display leading-snug" style="font-size:1.3rem; min-width:0;">' + esc(p.titulo) + '</h2>' +
+          '<span class="badge ' + (vivo ? 'badge-live' : 'badge-soon') + ' shrink-0">' +
+            (vivo ? 'Disponible' : 'Pronto') +
+          '</span>' +
+        '</div>' +
+        '<p class="mt-3 leading-relaxed grow" style="color:var(--fg-soft); font-size:.92rem;">' + esc(p.descripcion) + '</p>' +
+        precio +
+        boton +
+      '</article>';
+  }).join('');
+
+  var y = document.getElementById('year');
+  if (y) y.textContent = new Date().getFullYear();
+})();
+</script>
+
+</body>
+</html>

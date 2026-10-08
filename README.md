@@ -13,6 +13,7 @@ reprogramar creencias de escasez. Libro digital, trackers imprimibles y audios g
 |---|---|
 | `index.html` | La página completa. Documento HTML autónomo, sin build. Es lo que sirve GitHub Pages. |
 | `artifact.html` | La misma página sin `<!doctype>` ni `<head>`, para publicarla como Artifact de Claude. |
+| `productos.html` | Catálogo de productos. Para añadir uno, edita la lista `PRODUCTOS` del `<script>` al final del archivo. |
 
 Ambos comparten el mismo marcado y los mismos estilos. Si cambias uno, replica el cambio en el otro.
 
